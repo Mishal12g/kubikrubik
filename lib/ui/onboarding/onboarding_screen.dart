@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
-import 'package:kubikrubik/components/button_widget.dart';
-import 'package:kubikrubik/components/onboarding_widget.dart';
-import 'package:kubikrubik/helpers/colors_app.dart';
-import 'package:kubikrubik/onboarding/onboarding_controller.dart';
+import 'package:get/get.dart';
+import 'package:kubikrubik/resources/colors_app.dart';
+import 'package:kubikrubik/ui/components/button_widget.dart';
+import 'package:kubikrubik/ui/components/onboarding_widget.dart';
+import 'package:kubikrubik/ui/onboarding/onboarding_controller.dart';
 import 'package:kubikrubik/resources/resources.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -27,30 +26,31 @@ class OnboardingScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 98,
-                  left: 20,
-                  right: 20,
-                  bottom: 40,
-                ),
-                child: Column(
-                  children: [
-                    GetBuilder<OnboardingController>(
-                      builder: (_) => OnboardingWidget(
-                        imageNamed: c.getImage(),
-                        title: c.getText(),
+            child: SafeArea(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 98,
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: Column(
+                    children: [
+                      GetBuilder<OnboardingController>(
+                        builder: (_) => OnboardingWidget(
+                          imageNamed: c.getImage(),
+                          title: c.getText(),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 38),
-                    const Column(
-                      children: [
-                        _OnboardingButtonsWidget(),
-                        _ReferenceButtonsWidget()
-                      ],
-                    )
-                  ],
+                      const SizedBox(height: 38),
+                      const Column(
+                        children: [
+                          _OnboardingButtonsWidget(),
+                          _ReferenceButtonsWidget()
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -119,6 +119,9 @@ class _OnboardingButtonsWidget extends StatelessWidget {
             ),
             color: ColorsApp.blue,
             onTap: () {
+              if (Get.find<OnboardingController>().currentIndex == 2) {
+                Get.toNamed("/main_page");
+              }
               Get.find<OnboardingController>().increment();
             },
           ),

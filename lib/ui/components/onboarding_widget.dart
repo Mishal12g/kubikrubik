@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kubikrubik/helpers/colors_app.dart';
+import 'package:kubikrubik/resources/colors_app.dart';
 
 class OnboardingWidget extends StatelessWidget {
   final String imageNamed;

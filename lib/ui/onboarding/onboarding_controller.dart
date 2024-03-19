@@ -3,6 +3,7 @@ import 'package:kubikrubik/resources/resources.dart';
 
 class OnboardingController extends GetxController {
   int _currentIndex = 0;
+  int get currentIndex => _currentIndex;
 
   final _images = <String>[
     AppImages.onboarding1,
