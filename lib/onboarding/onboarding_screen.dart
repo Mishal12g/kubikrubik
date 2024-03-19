@@ -5,6 +5,7 @@ import 'package:kubikrubik/components/button_widget.dart';
 import 'package:kubikrubik/components/onboarding_widget.dart';
 import 'package:kubikrubik/helpers/colors_app.dart';
 import 'package:kubikrubik/onboarding/onboarding_controller.dart';
+import 'package:kubikrubik/resources/resources.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -22,7 +23,7 @@ class OnboardingScreen extends StatelessWidget {
             height: double.infinity,
             child: Image(
               fit: BoxFit.cover,
-              image: AssetImage("images/onboarding.png"),
+              image: AssetImage(AppImages.onboarding),
             ),
           ),
           Positioned(

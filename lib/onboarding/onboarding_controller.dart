@@ -1,12 +1,13 @@
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:kubikrubik/resources/resources.dart';
 
 class OnboardingController extends GetxController {
   int _currentIndex = 0;
 
   final _images = <String>[
-    'images/onboarding1.png',
-    'images/onboarding2.png',
-    'images/onboarding3.png',
+    AppImages.onboarding1,
+    AppImages.onboarding2,
+    AppImages.onboarding3,
   ];
 
   final _strings = <String>[
