@@ -30,8 +30,11 @@ class TileWidget extends StatelessWidget {
               const SizedBox(width: 12),
               Text(
                 title,
-                style:
-                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(31, 39, 75, 1),
+                ),
               ),
             ],
           ),
