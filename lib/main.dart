@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/ui/junior_page/junior_details_page.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-            color: ColorsApp.backgroundColor,
+            color: Color.fromRGBO(49, 34, 218, 0.665),
             foregroundColor: Colors.white,
             titleTextStyle:
                 TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         "/junior_page": (context) => const JuniorPage(),
         "/junior_details_page": (context) => const JuniorDetailsPage(),
         "/algorithms_page": (context) => const AlgorithmsPage(),
+        "/algorithms_detail_page": (context) => const AlgorithmsDetailPage(),
       },
     );
   }

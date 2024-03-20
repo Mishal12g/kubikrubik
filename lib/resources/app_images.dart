@@ -21,8 +21,12 @@ class AppImages {
   static const String onboarding1 = 'images/onboarding1.png';
   static const String onboarding2 = 'images/onboarding2.png';
   static const String onboarding3 = 'images/onboarding3.png';
+  static const String play = 'images/play.png';
   static const String roundAltArrowRight = 'images/round_alt_arrow_right.png';
   static const String settings = 'images/settings.png';
   static const String timer = 'images/timer.png';
   static const String unsplash = 'images/unsplash.png';
+  static const String video1 = 'images/video1.png';
+  static const String video2 = 'images/video2.png';
+  static const String video3 = 'images/video3.png';
 }

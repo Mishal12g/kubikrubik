@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
+import 'package:kubikrubik/ui/algorithms_page/algorithms_page_controller.dart';
 import 'package:kubikrubik/ui/components/algorithms_tile_widget.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
 import 'package:kubikrubik/ui/components/container_widget.dart';
@@ -60,17 +64,23 @@ class AlgorithmsPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   AlgorithmsTileWidget(
                     text: 'Метод слоями (Beginner\'s Method)',
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed("/algorithms_detail_page", arguments: 0);
+                    },
                   ),
                   const SizedBox(height: 20),
                   AlgorithmsTileWidget(
                     text: 'Метод CFOP (Cross, F2L, OLL, PLL):',
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed("/algorithms_detail_page", arguments: 1);
+                    },
                   ),
                   const SizedBox(height: 20),
                   AlgorithmsTileWidget(
                     text: 'Метод Roux',
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed("/algorithms_detail_page", arguments: 2);
+                    },
                   ),
                   const SizedBox(height: 20),
                 ],
@@ -96,25 +106,96 @@ class _LabelMethodsAndAlgorithmsWidget extends StatelessWidget {
   }
 }
 
-class _PagesWidget extends StatelessWidget {
+class _PagesWidget extends StatefulWidget {
   const _PagesWidget();
 
   @override
+  State<_PagesWidget> createState() => _PagesWidgetState();
+}
+
+class _PagesWidgetState extends State<_PagesWidget> {
+  final controller = AlgorithmsPageController();
+  late PageController _pageController;
+  int _currentPageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentPageIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const ContainerWidget(
+    return ContainerWidget(
       widget: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 200,
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (int index) {
+                setState(() {
+                  _currentPageIndex = index;
+                });
+              },
+              itemCount: controller.pages.length,
+              itemBuilder: (context, index) {
+                final page = controller.pages[index];
+
+                return _PageWidget(
+                    title: page.title,
+                    text: page.text,
+                    textTitle: page.titleText);
+              },
+            ),
+          ),
+          const SizedBox(height: 4),
+          PageViewIndicator(
+            otherSize: 8,
+            currentSize: 8,
+            otherColor: ColorsApp.indicator,
+            length: controller.pages.length,
+            currentIndex: _currentPageIndex,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _PageWidget extends StatelessWidget {
+  final String title;
+  final String textTitle;
+  final String text;
+
+  const _PageWidget({
+    required this.title,
+    required this.text,
+    required this.textTitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ContainerWidget(
+      edgeInsets: const EdgeInsets.all(0),
+      widget: ListView(
         children: [
           Text(
-            "Основные шаги сборки кубика Рубика для новичков",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           DocTextWidget(
-              font: FontWeight.w600,
-              title: "1. Сборка первого слоя (крест):",
-              text:
-                  "\n• Начните собирать кубик с одного из краев (например, с белого центрального элемента). \n• Настройте краевые элементы так, чтобы цвета на них совпадали с цветами центральных элементов боковых граней.\n• Таким образом, вы должны получить крест белого цвета на верхней стороне кубика."),
+            font: FontWeight.w600,
+            title: textTitle,
+            text: text,
+          )
         ],
       ),
     );
