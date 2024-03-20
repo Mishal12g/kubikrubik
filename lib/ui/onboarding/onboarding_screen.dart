@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kubikrubik/UI/components/onboarding_widget.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
 import 'package:kubikrubik/ui/components/button_widget.dart';
-import 'package:kubikrubik/ui/components/onboarding_widget.dart';
 import 'package:kubikrubik/ui/onboarding/onboarding_controller.dart';
 
 class OnboardingScreen extends StatelessWidget {

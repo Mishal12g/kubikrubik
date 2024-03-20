@@ -6,6 +6,7 @@ class AppImages {
   static const String x2 = 'images/2x2.png';
   static const String x3 = 'images/3x3.png';
   static const String x4 = 'images/4x4.png';
+  static const String algorithms = 'images/Algorithms.png';
   static const String hourglass = 'images/Hourglass.png';
   static const String algoritm = 'images/algoritm.png';
   static const String catalog = 'images/catalog.png';

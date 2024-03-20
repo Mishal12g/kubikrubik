@@ -30,7 +30,7 @@ class ExampleTileWidget extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 text,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               )
             ],
           ),

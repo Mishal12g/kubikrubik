@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
+import 'package:kubikrubik/ui/components/chevrine_right_icon_widget.dart';
 import 'package:kubikrubik/ui/components/tile_widget.dart';
 
 class MainPage extends StatelessWidget {
@@ -41,7 +42,9 @@ class MainPage extends StatelessWidget {
                         title: 'Алгоритмы',
                         color: ColorsApp.blueTile,
                         image: AppImages.algoritm,
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed("/algorithms_page");
+                        },
                       ),
                       const SizedBox(height: 12),
                       TileWidget(
@@ -132,17 +135,7 @@ class _JuniorTileWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: ColorsApp.blueButton,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: const Image(
-                  image: AssetImage(AppImages.roundAltArrowRight),
-                ),
-              ),
+              const ChevroneRightIconWidget()
             ],
           ),
         ),

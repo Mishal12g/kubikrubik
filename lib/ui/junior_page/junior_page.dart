@@ -105,9 +105,7 @@ class _BlockTwoWidget extends StatelessWidget {
 }
 
 class _OneBlockWidget extends StatelessWidget {
-  const _OneBlockWidget({
-    super.key,
-  });
+  const _OneBlockWidget();
 
   @override
   Widget build(BuildContext context) {
