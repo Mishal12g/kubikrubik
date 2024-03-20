@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
+import 'package:kubikrubik/ui/components/background_image_widget.dart';
 import 'package:kubikrubik/ui/components/tile_widget.dart';
 
 class MainPage extends StatelessWidget {
@@ -12,14 +14,7 @@ class MainPage extends StatelessWidget {
       backgroundColor: ColorsApp.backgroundColor,
       body: Stack(
         children: [
-          const SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Image(
-              fit: BoxFit.cover,
-              image: AssetImage(AppImages.onboarding),
-            ),
-          ),
+          const BackgroundImageWidget(),
           Positioned(
             top: 20,
             bottom: 101,
@@ -152,7 +147,9 @@ class _JuniorTileWidget extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Get.toNamed("/junior_page");
+      },
     );
   }
 }
