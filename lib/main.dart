@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page.dart';
+import 'package:kubikrubik/ui/catalog_page/catalog_form_page.dart';
+import 'package:kubikrubik/ui/catalog_page/catalog_page.dart';
 import 'package:kubikrubik/ui/junior_page/junior_details_page.dart';
 import 'package:kubikrubik/ui/junior_page/junior_page.dart';
 import 'package:kubikrubik/ui/main_page/main_page.dart';
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget {
         "/junior_details_page": (context) => const JuniorDetailsPage(),
         "/algorithms_page": (context) => const AlgorithmsPage(),
         "/algorithms_detail_page": (context) => const AlgorithmsDetailPage(),
+        "/catalog_page": (context) => const CatalogPage(),
+        "/catalog_form_page": (context) => const CatalogFormPage(),
       },
     );
   }

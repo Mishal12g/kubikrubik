@@ -51,7 +51,9 @@ class MainPage extends StatelessWidget {
                         title: 'Каталог',
                         color: ColorsApp.yellowTile,
                         image: AppImages.catalog,
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed("/catalog_page");
+                        },
                       ),
                       const SizedBox(height: 12),
                       TileWidget(

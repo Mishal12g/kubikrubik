@@ -8,8 +8,10 @@ class AppImages {
   static const String x4 = 'images/4x4.png';
   static const String algorithms = 'images/Algorithms.png';
   static const String hourglass = 'images/Hourglass.png';
+  static const String addPhoto = 'images/addPhoto.png';
   static const String algoritm = 'images/algoritm.png';
   static const String catalog = 'images/catalog.png';
+  static const String catalogEmptyState = 'images/catalogEmptyState.png';
   static const String cube1 = 'images/cube1.png';
   static const String cube2 = 'images/cube2.png';
   static const String cube3 = 'images/cube3.png';
@@ -22,6 +24,7 @@ class AppImages {
   static const String onboarding2 = 'images/onboarding2.png';
   static const String onboarding3 = 'images/onboarding3.png';
   static const String play = 'images/play.png';
+  static const String popUpClose = 'images/popUpClose.png';
   static const String roundAltArrowRight = 'images/round_alt_arrow_right.png';
   static const String settings = 'images/settings.png';
   static const String timer = 'images/timer.png';
