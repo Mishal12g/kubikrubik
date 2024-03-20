@@ -6,6 +6,7 @@ class FormTextFieldWidget extends StatelessWidget {
   final String text;
   final Widget? widget;
   final double? height;
+  final TextEditingController? controller;
 
   const FormTextFieldWidget({
     super.key,
@@ -13,6 +14,7 @@ class FormTextFieldWidget extends StatelessWidget {
     required this.text,
     this.widget,
     this.height,
+    this.controller,
   });
 
   @override
@@ -32,6 +34,7 @@ class FormTextFieldWidget extends StatelessWidget {
           decoration: const BoxDecoration(color: ColorsApp.blueButton),
           height: height,
           child: TextField(
+            controller: controller,
             maxLines: null,
             decoration: InputDecoration(
               hintText: hintText,
