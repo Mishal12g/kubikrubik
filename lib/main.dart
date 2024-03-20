@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page.dart';
-import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/ui/junior_page/junior_details_page.dart';
 import 'package:kubikrubik/ui/junior_page/junior_page.dart';
 import 'package:kubikrubik/ui/main_page/main_page.dart';
