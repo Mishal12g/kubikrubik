@@ -5,12 +5,14 @@ class ButtonWidget extends StatelessWidget {
 
   final Text text;
   final Function onTap;
+  final double? widthBorder;
 
   const ButtonWidget({
     super.key,
     this.color,
     required this.text,
     required this.onTap,
+    this.widthBorder,
   });
 
   @override
@@ -21,7 +23,7 @@ class ButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.blue, // Цвет рамки
-            width: 1.0,
+            width: widthBorder ?? 1.0,
           ),
           color: color,
           borderRadius: BorderRadius.circular(2),

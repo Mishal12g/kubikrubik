@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 
 class FormTextFieldWidget extends StatelessWidget {

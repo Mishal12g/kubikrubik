@@ -32,4 +32,6 @@ class AppImages {
   static const String video1 = 'images/video1.png';
   static const String video2 = 'images/video2.png';
   static const String video3 = 'images/video3.png';
+  static const String popUpOpen = 'images/pupUpOpen.png';
+  static const String edit = 'images/edit.png';
 }

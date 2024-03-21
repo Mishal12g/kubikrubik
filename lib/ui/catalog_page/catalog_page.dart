@@ -3,6 +3,7 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/catalog_pop_up.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
@@ -48,12 +49,22 @@ class CatalogPage extends StatelessWidget {
 
                               return Column(
                                 children: [
+                                  if (index == 0) const SizedBox(height: 20),
                                   _CatalogTileWidget(
-                                    index: index,
                                     name: catalog.name,
                                     size: catalog.size,
                                     image: catalog.photo,
-                                    onTap: () {},
+                                    button: _EditAndDeleteCatalogPopUP(
+                                      deleteOnTap: () async {
+                                        await _showDeleteCatalogAlertDialog(
+                                            context, index, catalog);
+                                      },
+                                      editOnTap: () {},
+                                    ),
+                                    onTap: () async {
+                                      await _showAlertDetailsCatalog(
+                                          context, catalog);
+                                    },
                                   ),
                                   const SizedBox(height: 12),
                                 ],
@@ -74,6 +85,132 @@ class CatalogPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<dynamic> _showDeleteCatalogAlertDialog(
+      BuildContext context, int index, Catalog catalog) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: ColorsApp.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(2.0),
+          ),
+        ),
+        title: const Center(
+          child: Text(
+            "Удалить",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+              color: Colors.redAccent,
+            ),
+          ),
+        ),
+        content: Text("Вы действительно хотите удалить “${catalog.name}”?"),
+        actions: [
+          Row(
+            children: [
+              Expanded(
+                child: ButtonWidget(
+                    text: const Text(
+                      "Закрыть",
+                    ),
+                    onTap: () {
+                      Get.back();
+                    }),
+              ),
+              const SizedBox(width: 23),
+              Expanded(
+                child: ButtonWidget(
+                  widthBorder: 0,
+                  color: Colors.redAccent,
+                  text: const Text(
+                    "Удалить",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    Get.find<CatalogPageController>().deleteCatalog(index);
+                    Get.back();
+                  },
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<dynamic> _showAlertDetailsCatalog(
+      BuildContext context, Catalog catalog) {
+    return showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              surfaceTintColor: Colors.transparent,
+              backgroundColor: ColorsApp.white,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(2.0),
+                ),
+              ),
+              content: Builder(
+                builder: (context) {
+                  var width = MediaQuery.of(context).size.width;
+
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: width,
+                        child: _CatalogTileWidget(
+                            edgeInsets: const EdgeInsets.all(0),
+                            name: catalog.name,
+                            size: catalog.size,
+                            image: catalog.photo,
+                            button: IconButton(
+                              icon: const Image(
+                                image: AssetImage(AppImages.edit),
+                              ),
+                              onPressed: () {},
+                            ),
+                            onTap: () {}),
+                      ),
+                      const SizedBox(height: 5),
+                      const Divider(
+                        color: ColorsApp.blueButton,
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              catalog.comment ?? "Пусто",
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ),
+              actions: [
+                ButtonWidget(
+                    color: ColorsApp.blue,
+                    text: const Text(
+                      "Закрыть",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Get.back();
+                    })
+              ],
+            ));
   }
 }
 
@@ -96,67 +233,64 @@ class _AddCatalogButtonWidget extends StatelessWidget {
 }
 
 class _CatalogTileWidget extends StatelessWidget {
-  final int? index;
   final String? image;
   final String name;
   final String size;
   final Function onTap;
+  final Widget? button;
+  final EdgeInsets? edgeInsets;
 
   const _CatalogTileWidget({
-    this.index,
     this.image,
     required this.name,
     required this.size,
     required this.onTap,
+    this.button,
+    this.edgeInsets,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ContainerWidget(
-      widget: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            width: 62,
-            height: 62,
-            decoration: BoxDecoration(
-              color: ColorsApp.greyTile,
-              borderRadius: BorderRadius.circular(100),
+    return GestureDetector(
+      child: ContainerWidget(
+        edgeInsets: edgeInsets ?? const EdgeInsets.all(12),
+        widget: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              width: 62,
+              height: 62,
+              decoration: BoxDecoration(
+                color: ColorsApp.greyTile,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Image(
+                image: AssetImage(image ?? AppImages.cube1),
+              ),
             ),
-            child: Image(
-              image: AssetImage(image ?? AppImages.cube1),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5),
-                Text(size),
-              ],
+                  const SizedBox(height: 5),
+                  Text(size),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
-          _EditAndDeleteCatalogPopUP(
-            deleteOnTap: () {
-              if (index != null) {
-                Get.find<CatalogPageController>().deleteCatalog(index ?? 0);
-              }
-            },
-            editOnTap: () {
-              //TODO: edit
-            },
-          ),
-        ],
+            const SizedBox(width: 12),
+            button ?? const SizedBox(),
+          ],
+        ),
       ),
+      onTap: () => onTap(),
     );
   }
 }

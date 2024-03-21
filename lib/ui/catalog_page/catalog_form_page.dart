@@ -131,18 +131,25 @@ class _PopUpSize extends StatelessWidget {
             sizeController.text = "Другое";
         }
       },
+      color: Colors.white,
       itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
         const PopupMenuItem<SampleItem>(
           value: SampleItem.itemOne,
-          child: Text('Item 1'),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('2*2'),
+              Image(image: AssetImage(AppImages.popUpOpen))
+            ],
+          ),
         ),
         const PopupMenuItem<SampleItem>(
           value: SampleItem.itemTwo,
-          child: Text('Item 2'),
+          child: Text('3*3'),
         ),
         const PopupMenuItem<SampleItem>(
           value: SampleItem.itemThree,
-          child: Text('Item 3'),
+          child: Text('4*4'),
         ),
         const PopupMenuItem<SampleItem>(
           value: SampleItem.other,
