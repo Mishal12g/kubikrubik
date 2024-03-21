@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page.dart';
 import 'package:kubikrubik/ui/catalog_page/catalog_form_page.dart';
@@ -9,7 +11,13 @@ import 'package:kubikrubik/ui/junior_page/junior_page.dart';
 import 'package:kubikrubik/ui/main_page/main_page.dart';
 import 'package:kubikrubik/ui/onboarding/onboarding_screen.dart';
 
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(1)) {
+    Hive.registerAdapter(CatalogAdapter());
+  }
+  await Hive.openBox<List>("Catalogs");
+
   runApp(const MyApp());
 }
 

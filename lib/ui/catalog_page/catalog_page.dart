@@ -3,6 +3,7 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:kubikrubik/models/enums/catalog_pop_up.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/catalog_page/catalog_page_controller.dart';
@@ -48,6 +49,7 @@ class CatalogPage extends StatelessWidget {
                               return Column(
                                 children: [
                                   _CatalogTileWidget(
+                                    index: index,
                                     name: catalog.name,
                                     size: catalog.size,
                                     image: catalog.photo,
@@ -94,12 +96,14 @@ class _AddCatalogButtonWidget extends StatelessWidget {
 }
 
 class _CatalogTileWidget extends StatelessWidget {
+  final int? index;
   final String? image;
   final String name;
   final String size;
   final Function onTap;
 
   const _CatalogTileWidget({
+    this.index,
     this.image,
     required this.name,
     required this.size,
@@ -141,14 +145,59 @@ class _CatalogTileWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          IconButton(
-              onPressed: () => onTap(),
-              icon: const Icon(
-                Icons.more_horiz,
-                color: ColorsApp.blue,
-              ))
+          _EditAndDeleteCatalogPopUP(
+            deleteOnTap: () {
+              if (index != null) {
+                Get.find<CatalogPageController>().deleteCatalog(index ?? 0);
+              }
+            },
+            editOnTap: () {
+              //TODO: edit
+            },
+          ),
         ],
       ),
+    );
+  }
+}
+
+class _EditAndDeleteCatalogPopUP extends StatelessWidget {
+  final Function deleteOnTap;
+  final Function editOnTap;
+  const _EditAndDeleteCatalogPopUP({
+    required this.deleteOnTap,
+    required this.editOnTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<CatalogPopUp>(
+      icon: const Icon(
+        Icons.more_horiz,
+        color: ColorsApp.blue,
+      ),
+      color: Colors.white,
+      onSelected: (item) {
+        switch (item) {
+          case CatalogPopUp.delete:
+            deleteOnTap();
+          case CatalogPopUp.edit:
+            editOnTap();
+        }
+      },
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<CatalogPopUp>>[
+        const PopupMenuItem<CatalogPopUp>(
+          value: CatalogPopUp.edit,
+          child: Text('Редактировать'),
+        ),
+        const PopupMenuItem<CatalogPopUp>(
+          value: CatalogPopUp.delete,
+          child: Text(
+            'Уалить',
+            style: TextStyle(color: Colors.redAccent),
+          ),
+        ),
+      ],
     );
   }
 }

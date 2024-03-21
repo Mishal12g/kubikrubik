@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/catalog_page/catalog_page_controller.dart';
@@ -63,15 +65,11 @@ class CatalogFormPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       FormTextFieldWidget(
+                        formatterText: FilteringTextInputFormatter.digitsOnly,
                         controller: sizeController,
                         text: "Размер",
                         hintText: "3*3",
-                        widget: IconButton(
-                          icon: const Image(
-                            image: AssetImage(AppImages.popUpClose),
-                          ),
-                          onPressed: () {},
-                        ),
+                        widget: _PopUpSize(sizeController),
                       ),
                       const SizedBox(height: 12),
                       FormTextFieldWidget(
@@ -111,6 +109,50 @@ class CatalogFormPage extends StatelessWidget {
   }
 }
 
+class _PopUpSize extends StatelessWidget {
+  final TextEditingController sizeController;
+  const _PopUpSize(this.sizeController);
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<SampleItem>(
+      icon: const Image(
+        image: AssetImage(AppImages.popUpClose),
+      ),
+      onSelected: (SampleItem item) {
+        switch (item) {
+          case SampleItem.itemOne:
+            sizeController.text = "2*2";
+          case SampleItem.itemTwo:
+            sizeController.text = "3*3";
+          case SampleItem.itemThree:
+            sizeController.text = "4*4";
+          case SampleItem.other:
+            sizeController.text = "Другое";
+        }
+      },
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
+        const PopupMenuItem<SampleItem>(
+          value: SampleItem.itemOne,
+          child: Text('Item 1'),
+        ),
+        const PopupMenuItem<SampleItem>(
+          value: SampleItem.itemTwo,
+          child: Text('Item 2'),
+        ),
+        const PopupMenuItem<SampleItem>(
+          value: SampleItem.itemThree,
+          child: Text('Item 3'),
+        ),
+        const PopupMenuItem<SampleItem>(
+          value: SampleItem.other,
+          child: Text('Другое'),
+        ),
+      ],
+    );
+  }
+}
+
 class _SaveCatalogButtonWidget extends StatelessWidget {
   final Function onTap;
   const _SaveCatalogButtonWidget({
@@ -128,4 +170,11 @@ class _SaveCatalogButtonWidget extends StatelessWidget {
       onTap: () => onTap(),
     );
   }
+}
+
+enum SampleItem {
+  itemOne,
+  itemTwo,
+  itemThree,
+  other,
 }

@@ -1,33 +1,30 @@
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:kubikrubik/resources/resources.dart';
+import 'package:kubikrubik/models/catalog.dart';
+import 'package:kubikrubik/services/catalogs_services.dart';
 
 class CatalogPageController extends GetxController {
-  final List<Catalog> _catalogs = [
-    Catalog(
-      name: "name",
-      size: "size",
-      comment: "comment",
-      photo: AppImages.cube2,
-    )
-  ];
+  final CatalogService service = CatalogService();
+
+  List<Catalog> _catalogs = [];
   List<Catalog> get catalogs => _catalogs;
 
-  addCatalog(Catalog catalog) {
-    _catalogs.add(catalog);
+  CatalogPageController() {
+    loadCatalogs();
+  }
+
+  loadCatalogs() {
+    service.load();
+    _catalogs = service.catalogs;
     update();
   }
-}
 
-class Catalog {
-  final String name;
-  final String size;
-  final String? comment;
-  final String? photo;
+  addCatalog(Catalog catalog) {
+    service.add(catalog);
+    loadCatalogs();
+  }
 
-  Catalog({
-    required this.name,
-    required this.size,
-    required this.comment,
-    required this.photo,
-  });
+  deleteCatalog(int index) {
+    service.delete(index);
+    update();
+  }
 }
