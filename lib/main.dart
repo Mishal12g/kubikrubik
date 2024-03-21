@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kubikrubik/models/catalog.dart';
+import 'package:kubikrubik/services/onboarding.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page.dart';
 import 'package:kubikrubik/ui/catalog_page/catalog_form_page.dart';
@@ -17,6 +18,7 @@ Future<void> main(List<String> args) async {
     Hive.registerAdapter(CatalogAdapter());
   }
   await Hive.openBox<List>("Catalogs");
+  await Hive.openBox<bool>("Onboarding");
 
   runApp(const MyApp());
 }
@@ -35,7 +37,8 @@ class MyApp extends StatelessWidget {
             titleTextStyle:
                 TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
       ),
-      initialRoute: "/",
+      initialRoute:
+          !OnboardingService.isHiddenOnboarding() ? "/" : "/main_page",
       routes: {
         "/": (context) => const OnboardingScreen(),
         "/main_page": (context) => const MainPage(),

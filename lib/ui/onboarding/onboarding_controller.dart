@@ -1,5 +1,6 @@
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:kubikrubik/resources/resources.dart';
+import 'package:kubikrubik/services/onboarding.dart';
 
 class OnboardingController extends GetxController {
   int _currentIndex = 0;
@@ -28,5 +29,9 @@ class OnboardingController extends GetxController {
   increment() {
     if (_currentIndex != 2) _currentIndex++;
     update();
+  }
+
+  hideOnboarding() {
+    OnboardingService.hide();
   }
 }

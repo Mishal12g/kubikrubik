@@ -100,7 +100,9 @@ class _OnboardingButtonsWidget extends StatelessWidget {
               "Пропустить",
             ),
             color: ColorsApp.white,
-            onTap: () {},
+            onTap: () {
+              hideOnboarding();
+            },
           ),
         ),
         const SizedBox(width: 13),
@@ -113,7 +115,7 @@ class _OnboardingButtonsWidget extends StatelessWidget {
             color: ColorsApp.blue,
             onTap: () {
               if (Get.find<OnboardingController>().currentIndex == 2) {
-                Get.toNamed("/main_page");
+                hideOnboarding();
               }
               Get.find<OnboardingController>().increment();
             },
@@ -121,5 +123,10 @@ class _OnboardingButtonsWidget extends StatelessWidget {
         )
       ],
     );
+  }
+
+  hideOnboarding() {
+    Get.find<OnboardingController>().hideOnboarding();
+    Get.toNamed("/main_page");
   }
 }

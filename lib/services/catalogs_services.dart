@@ -8,8 +8,6 @@ class CatalogService {
   List<Catalog> _catalogs = [];
   List<Catalog> get catalogs => _catalogs;
 
-  CatalogService();
-
   load() {
     box = Hive.box<List>("Catalogs");
     _catalogs = box.get(_listCatalogs)?.map((e) => e as Catalog).toList() ?? [];
