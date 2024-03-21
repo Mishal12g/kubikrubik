@@ -17,9 +17,9 @@ class CatalogFormPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = Get.find<CatalogPageController>();
 
-    final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _sizeController = TextEditingController();
-    final TextEditingController _commentController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController sizeController = TextEditingController();
+    final TextEditingController commentController = TextEditingController();
 
     return Scaffold(
       backgroundColor: ColorsApp.backgroundColor,
@@ -57,13 +57,13 @@ class CatalogFormPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       FormTextFieldWidget(
-                        controller: _nameController,
+                        controller: nameController,
                         text: "Название",
                         hintText: "Новый кубик",
                       ),
                       const SizedBox(height: 12),
                       FormTextFieldWidget(
-                        controller: _sizeController,
+                        controller: sizeController,
                         text: "Размер",
                         hintText: "3*3",
                         widget: IconButton(
@@ -75,7 +75,7 @@ class CatalogFormPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       FormTextFieldWidget(
-                        controller: _commentController,
+                        controller: commentController,
                         text: "Комментарий",
                         hintText: "Новый кубик",
                         height: 100,
@@ -87,16 +87,16 @@ class CatalogFormPage extends StatelessWidget {
                 _SaveCatalogButtonWidget(
                   onTap: () {
                     final catalog = Catalog(
-                      name: _nameController.text,
-                      size: _sizeController.text,
-                      comment: _commentController.text.isNotEmpty
-                          ? _commentController.text
+                      name: nameController.text,
+                      size: sizeController.text,
+                      comment: commentController.text.isNotEmpty
+                          ? commentController.text
                           : null,
                       photo: null,
                     );
 
-                    if (_nameController.text.isNotEmpty &&
-                        _sizeController.text.isNotEmpty) {
+                    if (nameController.text.isNotEmpty &&
+                        sizeController.text.isNotEmpty) {
                       c.addCatalog(catalog);
                       Get.back();
                     }
