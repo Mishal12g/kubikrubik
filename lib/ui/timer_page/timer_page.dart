@@ -127,7 +127,15 @@ class _PopUpSize extends StatelessWidget {
         return c.catalogs.map((Catalog item) {
           return PopupMenuItem<String>(
             value: item.name,
-            child: Text(item.name),
+            child: item == c.catalogs.first
+                ? Row(
+                    children: [
+                      Text(item.name),
+                      const Spacer(),
+                      const Image(image: AssetImage(AppImages.popUpOpen))
+                    ],
+                  )
+                : Text(item.name),
           );
         }).toList();
       },
