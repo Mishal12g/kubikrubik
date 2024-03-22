@@ -11,6 +11,7 @@ import 'package:kubikrubik/ui/components/background_image_widget.dart';
 import 'package:kubikrubik/ui/components/button_widget.dart';
 import 'package:kubikrubik/ui/components/container_widget.dart';
 import 'package:kubikrubik/ui/components/form_text_field_widget.dart';
+import 'package:kubikrubik/ui/timer_page/timer_page_controller.dart';
 
 class CatalogFormPage extends StatelessWidget {
   const CatalogFormPage({super.key});
@@ -65,6 +66,7 @@ class CatalogFormPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       FormTextFieldWidget(
+                        readOnly: true,
                         formatterText: FilteringTextInputFormatter.digitsOnly,
                         controller: sizeController,
                         text: "Размер",
@@ -96,6 +98,7 @@ class CatalogFormPage extends StatelessWidget {
                     if (nameController.text.isNotEmpty &&
                         sizeController.text.isNotEmpty) {
                       c.addCatalog(catalog);
+                      Get.find<TimerPageController>().loadCatalogs();
                       Get.back();
                     }
                   },

@@ -11,6 +11,7 @@ import 'package:kubikrubik/ui/junior_page/junior_details_page.dart';
 import 'package:kubikrubik/ui/junior_page/junior_page.dart';
 import 'package:kubikrubik/ui/main_page/main_page.dart';
 import 'package:kubikrubik/ui/onboarding/onboarding_screen.dart';
+import 'package:kubikrubik/ui/timer_page/timer_page.dart';
 
 Future<void> main(List<String> args) async {
   await Hive.initFlutter();
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         "/algorithms_detail_page": (context) => const AlgorithmsDetailPage(),
         "/catalog_page": (context) => const CatalogPage(),
         "/catalog_form_page": (context) => const CatalogFormPage(),
+        "/timer_page": (context) => const TimerPage(),
       },
     );
   }

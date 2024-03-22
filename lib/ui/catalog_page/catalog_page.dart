@@ -11,14 +11,16 @@ import 'package:kubikrubik/ui/catalog_page/catalog_page_controller.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
 import 'package:kubikrubik/ui/components/button_widget.dart';
 import 'package:kubikrubik/ui/components/container_widget.dart';
+import 'package:kubikrubik/ui/timer_page/timer_page_controller.dart';
 
 class CatalogPage extends StatelessWidget {
   const CatalogPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    CatalogPageController c = Get.put(CatalogPageController());
-
+    Get.lazyPut(() => CatalogPageController());
+    Get.lazyPut(() => TimerPageController());
+    CatalogPageController c = Get.find<CatalogPageController>();
     return Scaffold(
       backgroundColor: ColorsApp.backgroundColor,
       appBar: AppBar(
@@ -135,6 +137,8 @@ class CatalogPage extends StatelessWidget {
                   ),
                   onTap: () {
                     Get.find<CatalogPageController>().deleteCatalog(index);
+                    Get.find<TimerPageController>().loadCatalogs();
+
                     Get.back();
                   },
                 ),
@@ -168,17 +172,18 @@ class CatalogPage extends StatelessWidget {
                       SizedBox(
                         width: width,
                         child: _CatalogTileWidget(
-                            edgeInsets: const EdgeInsets.all(0),
-                            name: catalog.name,
-                            size: catalog.size,
-                            image: catalog.photo,
-                            button: IconButton(
-                              icon: const Image(
-                                image: AssetImage(AppImages.edit),
-                              ),
-                              onPressed: () {},
+                          edgeInsets: const EdgeInsets.all(0),
+                          name: catalog.name,
+                          size: catalog.size,
+                          image: catalog.photo,
+                          button: IconButton(
+                            icon: const Image(
+                              image: AssetImage(AppImages.edit),
                             ),
-                            onTap: () {}),
+                            onPressed: () {},
+                          ),
+                          onTap: () {},
+                        ),
                       ),
                       const SizedBox(height: 5),
                       const Divider(

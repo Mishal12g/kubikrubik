@@ -60,7 +60,9 @@ class MainPage extends StatelessWidget {
                         title: 'Таймер',
                         color: ColorsApp.greenTile,
                         image: AppImages.timer,
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed("/timer_page");
+                        },
                       ),
                       const SizedBox(height: 40),
                       TileWidget(

@@ -10,6 +10,7 @@ class FormTextFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? textInputType;
   final TextInputFormatter? formatterText;
+  final bool? readOnly;
 
   const FormTextFieldWidget({
     super.key,
@@ -20,6 +21,7 @@ class FormTextFieldWidget extends StatelessWidget {
     this.controller,
     this.textInputType,
     this.formatterText,
+    this.readOnly,
   });
 
   @override
@@ -39,6 +41,8 @@ class FormTextFieldWidget extends StatelessWidget {
           decoration: const BoxDecoration(color: ColorsApp.blueButton),
           height: height,
           child: TextField(
+            style: const TextStyle(
+                fontSize: 16.0, height: 1.0, color: Colors.black),
             keyboardType: textInputType,
             inputFormatters: formatterText != null
                 ? [
@@ -53,6 +57,7 @@ class FormTextFieldWidget extends StatelessWidget {
                   ]
                 : [],
             controller: controller,
+            readOnly: readOnly ?? false,
             maxLines: null,
             decoration: InputDecoration(
               hintText: hintText,
