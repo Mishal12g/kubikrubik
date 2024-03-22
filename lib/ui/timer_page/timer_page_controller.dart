@@ -8,6 +8,7 @@ class TimerPageController extends GetxController {
   final CatalogService _catalogService = CatalogService();
 
   List<Catalog> _catalogs = [];
+  Catalog? catalog;
   TimerStopwatch _timerOrStopwatch = TimerStopwatch.timer;
   String _timeResult = "00:00";
   bool isPlay = false;

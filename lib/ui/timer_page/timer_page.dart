@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/timer_stopwatch.dart';
+import 'package:kubikrubik/models/record.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
@@ -10,6 +11,7 @@ import 'package:kubikrubik/ui/components/button_widget.dart';
 import 'package:kubikrubik/ui/components/container_widget.dart';
 import 'package:kubikrubik/ui/components/form_text_field_widget.dart';
 import 'package:kubikrubik/ui/components/timer_button_widget.dart';
+import 'package:kubikrubik/ui/records_page/records_page_controller.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page_controller.dart';
 
 class TimerPage extends StatelessWidget {
@@ -35,6 +37,8 @@ class TimerPage extends StatelessWidget {
         TextEditingController();
 
     Get.lazyPut(() => TimerPageController());
+    Get.put(RecordPageController());
+
     final c = Get.find<TimerPageController>();
 
     return Scaffold(
@@ -65,6 +69,9 @@ class TimerPage extends StatelessWidget {
                           ),
                           onPressed: () {
                             c.setTimerOrStopwatch(TimerStopwatch.timer);
+
+                            _clearTextFields(nameTextFieldController,
+                                selectTextFieldController);
                           },
                         ),
                         TextButton(
@@ -77,6 +84,9 @@ class TimerPage extends StatelessWidget {
                           ),
                           onPressed: () {
                             c.setTimerOrStopwatch(TimerStopwatch.stopwatch);
+
+                            _clearTextFields(nameTextFieldController,
+                                selectTextFieldController);
                           },
                         ),
                         const Spacer(),
@@ -84,7 +94,9 @@ class TimerPage extends StatelessWidget {
                           width: 40,
                           height: 40,
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed("/records_page");
+                            },
                             icon: const Image(
                               image: AssetImage(AppImages.record),
                             ),
@@ -114,7 +126,10 @@ class TimerPage extends StatelessWidget {
                         const Divider(
                           color: ColorsApp.blueButton,
                         ),
-                        const _MyTimerWidget(),
+                        _MyTimerWidget(
+                          nameTextFieldController: nameTextFieldController,
+                          selectTextFieldController: selectTextFieldController,
+                        ),
                       ],
                     ),
                   ),
@@ -126,6 +141,16 @@ class TimerPage extends StatelessWidget {
       ),
     );
   }
+
+  void _clearTextFields(
+    TextEditingController nameTextFieldController,
+    TextEditingController selectTextFieldController,
+  ) {
+    if (!Get.find<TimerPageController>().isPlay) {
+      nameTextFieldController.clear();
+      selectTextFieldController.clear();
+    }
+  }
 }
 
 class _PopUpSize extends StatelessWidget {
@@ -136,37 +161,46 @@ class _PopUpSize extends StatelessWidget {
   Widget build(BuildContext context) {
     TimerPageController c = Get.find<TimerPageController>();
 
-    return PopupMenuButton<String>(
+    return PopupMenuButton<Catalog>(
       color: Colors.white,
       surfaceTintColor: Colors.white,
       icon: const Image(
         image: AssetImage(AppImages.popUpClose),
       ),
       itemBuilder: (BuildContext context) {
-        return c.catalogs.map((Catalog item) {
-          return PopupMenuItem<String>(
-            value: item.name,
-            child: item == c.catalogs.first
-                ? Row(
-                    children: [
-                      Text(item.name),
-                      const Spacer(),
-                      const Image(image: AssetImage(AppImages.popUpOpen))
-                    ],
-                  )
-                : Text(item.name),
-          );
-        }).toList();
+        return c.catalogs.map(
+          (Catalog item) {
+            return PopupMenuItem<Catalog>(
+              value: item,
+              child: item == c.catalogs.first
+                  ? Row(
+                      children: [
+                        Text(item.name),
+                        const Spacer(),
+                        const Image(image: AssetImage(AppImages.popUpOpen))
+                      ],
+                    )
+                  : Text(item.name),
+            );
+          },
+        ).toList();
       },
-      onSelected: (String selectedValue) {
-        sizeController.text = selectedValue;
+      onSelected: (Catalog selectedValue) {
+        sizeController.text = selectedValue.name;
+        c.catalog = selectedValue;
       },
     );
   }
 }
 
 class _MyTimerWidget extends StatelessWidget {
-  const _MyTimerWidget();
+  final TextEditingController selectTextFieldController;
+  final TextEditingController nameTextFieldController;
+
+  const _MyTimerWidget({
+    required this.nameTextFieldController,
+    required this.selectTextFieldController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -180,8 +214,23 @@ class _MyTimerWidget extends StatelessWidget {
                 TimerButtonWidget(
                   isPlay: c.isPlay,
                   action: () {
-                    c.isPlay = !c.isPlay;
-                    c.isPlay ? c.startTimer() : c.stopTimer();
+                    if (selectTextFieldController.text.isNotEmpty &&
+                        nameTextFieldController.text.isNotEmpty) {
+                      c.isPlay = !c.isPlay;
+                      if (c.isPlay) {
+                        c.startTimer();
+                      } else {
+                        c.stopTimer();
+                        final record = RecordCatalog(
+                          date: DateTime.now().toString(),
+                          time: c.timeResult,
+                          size: c.catalog?.size ?? "not size",
+                          name: nameTextFieldController.text,
+                        );
+
+                        Get.find<RecordPageController>().addRecords(record);
+                      }
+                    }
                   },
                 ),
                 Center(
@@ -276,8 +325,23 @@ class _MyTimerWidget extends StatelessWidget {
                 TimerButtonWidget(
                   isPlay: c.isPlay,
                   action: () {
-                    c.isPlay = !c.isPlay;
-                    c.isPlay ? c.startTimer() : c.stopTimer();
+                    if (selectTextFieldController.text.isNotEmpty &&
+                        nameTextFieldController.text.isNotEmpty) {
+                      c.isPlay = !c.isPlay;
+                      if (c.isPlay) {
+                        c.startTimer();
+                      } else {
+                        c.stopTimer();
+                        final record = RecordCatalog(
+                          date: DateTime.now().toString(),
+                          time: c.timeResult,
+                          size: c.catalog?.size ?? "not size",
+                          name: nameTextFieldController.text,
+                        );
+
+                        Get.find<RecordPageController>().addRecords(record);
+                      }
+                    }
                   },
                 ),
                 Center(
