@@ -34,7 +34,7 @@ class RecordsPage extends StatelessWidget {
                         final reverse = c.records.reversed.toList();
                         final record = reverse[index];
                         if (index == 0) {
-                          Column(
+                          return Column(
                             children: [
                               const SizedBox(height: 20),
                               _RecordTileWidget(

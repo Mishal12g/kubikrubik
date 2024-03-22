@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:kubikrubik/halpers/date_formatters.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/timer_stopwatch.dart';
 import 'package:kubikrubik/models/record.dart';
@@ -221,8 +223,9 @@ class _MyTimerWidget extends StatelessWidget {
                         c.startTimer();
                       } else {
                         c.stopTimer();
+
                         final record = RecordCatalog(
-                          date: DateTime.now().toString(),
+                          date: DateFormattes.dateAndTime(),
                           time: c.timeResult,
                           size: c.catalog?.size ?? "not size",
                           name: nameTextFieldController.text,
