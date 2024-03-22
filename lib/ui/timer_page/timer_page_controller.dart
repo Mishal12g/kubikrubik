@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:kubikrubik/halpers/date_formatters.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/timer_stopwatch.dart';
 import 'package:kubikrubik/services/catalogs_services.dart';
@@ -11,6 +12,7 @@ class TimerPageController extends GetxController {
   Catalog? catalog;
   TimerStopwatch _timerOrStopwatch = TimerStopwatch.timer;
   String _timeResult = "00:00";
+  int seconds = 0;
   bool isPlay = false;
   bool timerIsActive = false;
   late String selectedTime;
@@ -62,18 +64,6 @@ class TimerPageController extends GetxController {
     update();
   }
 
-  String _formatDuration(int seconds) {
-    int hours = seconds ~/ 3600;
-    int minutes = (seconds ~/ 60) % 60;
-    int remainingSeconds = seconds % 60;
-
-    if (hours > 0) {
-      return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
-    } else {
-      return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
-    }
-  }
-
   void startTimer() {
     if (!timerIsActive) {
       _timeResult = "00:00";
@@ -83,7 +73,8 @@ class TimerPageController extends GetxController {
       _timer = Timer.periodic(
         const Duration(seconds: 1),
         (timer) {
-          _timeResult = _formatDuration(timer.tick);
+          seconds = timer.tick;
+          _timeResult = Formattes.formatDuration(timer.tick);
           update();
         },
       );
