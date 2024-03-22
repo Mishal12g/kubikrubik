@@ -13,4 +13,5 @@ class ColorsApp {
   static const Color yellowButton = Color.fromRGBO(255, 187, 60, 1);
   static const Color greenTile = Color.fromRGBO(99, 232, 198, 0.7);
   static const Color greyTile = Color.fromRGBO(190, 196, 210, 0.7);
+  static const Color redAccent = Color.fromRGBO(233, 70, 71, 1);
 }

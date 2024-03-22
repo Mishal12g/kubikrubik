@@ -105,7 +105,7 @@ class CatalogPage extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
-              color: Colors.redAccent,
+              color: ColorsApp.redAccent,
             ),
           ),
         ),
@@ -126,7 +126,7 @@ class CatalogPage extends StatelessWidget {
               Expanded(
                 child: ButtonWidget(
                   widthBorder: 0,
-                  color: Colors.redAccent,
+                  color: ColorsApp.redAccent,
                   text: const Text(
                     "Удалить",
                     style: TextStyle(
