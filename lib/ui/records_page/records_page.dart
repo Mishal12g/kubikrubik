@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kubikrubik/helpers/date_formatters.dart';
@@ -61,54 +62,7 @@ class RecordsPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: c.recordsState == RecordsState.myRecords
                         ? _MyRecordsListWidget(c: c)
-                        : ListView.builder(
-                            itemCount: texts.length,
-                            itemBuilder: (context, index) {
-                              if (texts.length == 1) {
-                                return _RecordTile(
-                                  titles: titles,
-                                  texts: texts,
-                                  index: index,
-                                  borderRadius: BorderRadius.circular(2),
-                                  divider: Container(
-                                      height: 1, color: ColorsApp.blueButton),
-                                );
-                              } else {
-                                if (index == 0) {
-                                  return _RecordTile(
-                                    titles: titles,
-                                    texts: texts,
-                                    index: index,
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(2),
-                                      topRight: Radius.circular(2),
-                                    ),
-                                    divider: Container(
-                                        height: 1, color: ColorsApp.blueButton),
-                                  );
-                                } else if (index == texts.length - 1) {
-                                  return _RecordTile(
-                                    titles: titles,
-                                    texts: texts,
-                                    index: index,
-                                    borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(2),
-                                        bottomRight: Radius.circular(2)),
-                                    divider: const SizedBox(),
-                                  );
-                                } else {
-                                  return _RecordTile(
-                                    titles: titles,
-                                    texts: texts,
-                                    index: index,
-                                    borderRadius: BorderRadius.circular(0),
-                                    divider: Container(
-                                        height: 1, color: ColorsApp.blueButton),
-                                  );
-                                }
-                              }
-                            },
-                          ),
+                        : _WorldRecordsTileWidget(texts: texts, titles: titles),
                   ),
                 ),
               ],
@@ -116,6 +70,73 @@ class RecordsPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _WorldRecordsTileWidget extends StatelessWidget {
+  const _WorldRecordsTileWidget({
+    super.key,
+    required this.texts,
+    required this.titles,
+  });
+
+  final List texts;
+  final List titles;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        Expanded(
+          child: ListView.builder(
+            itemCount: texts.length,
+            itemBuilder: (context, index) {
+              if (texts.length == 1) {
+                return _RecordTile(
+                  titles: titles,
+                  texts: texts,
+                  index: index,
+                  borderRadius: BorderRadius.circular(2),
+                  divider: Container(height: 1, color: ColorsApp.blueButton),
+                );
+              } else {
+                if (index == 0) {
+                  return _RecordTile(
+                    titles: titles,
+                    texts: texts,
+                    index: index,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(2),
+                      topRight: Radius.circular(2),
+                    ),
+                    divider: Container(height: 1, color: ColorsApp.blueButton),
+                  );
+                } else if (index == texts.length - 1) {
+                  return _RecordTile(
+                    titles: titles,
+                    texts: texts,
+                    index: index,
+                    borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(2),
+                        bottomRight: Radius.circular(2)),
+                    divider: const SizedBox(),
+                  );
+                } else {
+                  return _RecordTile(
+                    titles: titles,
+                    texts: texts,
+                    index: index,
+                    borderRadius: BorderRadius.circular(0),
+                    divider: Container(height: 1, color: ColorsApp.blueButton),
+                  );
+                }
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -190,23 +211,56 @@ class _MyRecordsListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final reverse = c.records.reversed.toList();
         final record = reverse[index];
-        if (index == 0) {
+        if (reverse.length == 1) {
           return Column(
             children: [
               const SizedBox(height: 20),
               _RecordTileWidget(
-                record.date,
-                Formattes.formatDuration(record.seconds),
-                record.size,
-              ),
+                  borderRadius: BorderRadius.circular(2),
+                  date: record.date,
+                  time: Formattes.formatDuration(record.seconds),
+                  size: record.size),
             ],
           );
+        } else {
+          if (index == 0) {
+            return Column(
+              children: [
+                const SizedBox(height: 20),
+                _RecordTileWidget(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(2),
+                      topRight: Radius.circular(2),
+                    ),
+                    date: record.date,
+                    time: Formattes.formatDuration(record.seconds),
+                    size: record.size),
+              ],
+            );
+          } else if (index == reverse.length - 1) {
+            return Column(
+              children: [
+                _RecordTileWidget(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(2),
+                      bottomRight: Radius.circular(2),
+                    ),
+                    date: record.date,
+                    time: Formattes.formatDuration(record.seconds),
+                    size: record.size),
+              ],
+            );
+          } else {
+            return Column(
+              children: [
+                _RecordTileWidget(
+                    date: record.date,
+                    time: Formattes.formatDuration(record.seconds),
+                    size: record.size),
+              ],
+            );
+          }
         }
-        return _RecordTileWidget(
-          record.date,
-          Formattes.formatDuration(record.seconds),
-          record.size,
-        );
       },
     );
   }
@@ -256,13 +310,20 @@ class _RecordTileWidget extends StatelessWidget {
   final String date;
   final String time;
   final String size;
+  final BorderRadius? borderRadius;
 
-  const _RecordTileWidget(this.date, this.time, this.size);
+  const _RecordTileWidget({
+    required this.date,
+    required this.time,
+    required this.size,
+    this.borderRadius,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        borderRadius: borderRadius,
         color: Colors.white,
       ),
       child: Stack(
