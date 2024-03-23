@@ -16,31 +16,34 @@ class TileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        decoration:
-            BoxDecoration(color: color, borderRadius: BorderRadius.circular(2)),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
-            children: [
-              Image(
-                image: AssetImage(image),
-              ),
-              const SizedBox(width: 12),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(31, 39, 75, 1),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        child: Container(
+          decoration: BoxDecoration(
+              color: color, borderRadius: BorderRadius.circular(2)),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              children: [
+                Image(
+                  image: AssetImage(image),
                 ),
-              ),
-            ],
+                const SizedBox(width: 12),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(31, 39, 75, 1),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
+        onTap: () => onTap(),
       ),
-      onTap: () => onTap(),
     );
   }
 }

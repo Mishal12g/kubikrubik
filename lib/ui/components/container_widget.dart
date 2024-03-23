@@ -12,14 +12,16 @@ class ContainerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: edgeInsets,
-      decoration: BoxDecoration(
-        color: ColorsApp.white,
-        borderRadius: BorderRadius.circular(2),
+    return InkWell(
+      child: Container(
+        width: double.infinity,
+        padding: edgeInsets,
+        decoration: BoxDecoration(
+          color: ColorsApp.white,
+          borderRadius: BorderRadius.circular(2),
+        ),
+        child: widget,
       ),
-      child: widget,
     );
   }
 }

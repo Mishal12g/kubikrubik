@@ -256,46 +256,56 @@ class _CatalogTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: ContainerWidget(
-        edgeInsets: edgeInsets ?? const EdgeInsets.all(12),
-        widget: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              width: 62,
-              height: 62,
-              decoration: BoxDecoration(
-                color: ColorsApp.greyTile,
-                borderRadius: BorderRadius.circular(100),
+    return Stack(
+      children: [
+        ContainerWidget(
+          edgeInsets: edgeInsets ?? const EdgeInsets.all(12),
+          widget: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                width: 62,
+                height: 62,
+                decoration: BoxDecoration(
+                  color: ColorsApp.greyTile,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: Image(
+                  image: AssetImage(image ?? AppImages.cube1),
+                ),
               ),
-              child: Image(
-                image: AssetImage(image ?? AppImages.cube1),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(size),
-                ],
+                    const SizedBox(height: 5),
+                    Text(size),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            button ?? const SizedBox(),
-          ],
+              const SizedBox(width: 12),
+              button ?? const SizedBox(),
+            ],
+          ),
         ),
-      ),
-      onTap: () => onTap(),
+        Positioned.fill(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () => onTap(),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -74,24 +74,35 @@ class _SettingTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap(),
-      child: ContainerWidget(
+    return Stack(
+      children: [
+        ContainerWidget(
           widget: Row(
-        children: [
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+            children: [
+              Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Spacer(),
+              Image(
+                image: AssetImage(icon),
+              )
+            ],
+          ),
+        ),
+        Positioned.fill(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () => onTap(),
+              borderRadius: BorderRadius.circular(2),
             ),
           ),
-          const Spacer(),
-          Image(
-            image: AssetImage(icon),
-          )
-        ],
-      )),
+        ),
+      ],
     );
   }
 }
