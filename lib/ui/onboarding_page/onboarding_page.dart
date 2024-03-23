@@ -4,7 +4,7 @@ import 'package:kubikrubik/UI/components/onboarding_widget.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
 import 'package:kubikrubik/ui/components/button_widget.dart';
-import 'package:kubikrubik/ui/onboarding/onboarding_controller.dart';
+import 'package:kubikrubik/ui/onboarding_page/onboarding_controller.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

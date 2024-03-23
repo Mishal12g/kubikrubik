@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:kubikrubik/halpers/date_formatters.dart';
+import 'package:kubikrubik/helpers/date_formatters.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
 import 'package:kubikrubik/ui/records_page/records_page_controller.dart';

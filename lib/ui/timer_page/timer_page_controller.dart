@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:kubikrubik/halpers/date_formatters.dart';
+import 'package:kubikrubik/helpers/date_formatters.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/timer_stopwatch.dart';
 import 'package:kubikrubik/services/catalogs_services.dart';
@@ -76,6 +76,12 @@ class TimerPageController extends GetxController {
           seconds = timer.tick;
           _timeResult = Formattes.formatDuration(timer.tick);
           update();
+          if (timerOrStopwatch == TimerStopwatch.timer) {
+            if (selectedTime == _timeResult) {
+              isPlay = false;
+              stopTimer();
+            }
+          }
         },
       );
     }
@@ -85,6 +91,7 @@ class TimerPageController extends GetxController {
     if (timerIsActive) {
       timerIsActive = !timerIsActive;
       _timer.cancel();
+      isPlay = false;
       update();
     }
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kubikrubik/halpers/date_formatters.dart';
+import 'package:kubikrubik/helpers/date_formatters.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/timer_stopwatch.dart';
 import 'package:kubikrubik/models/record_catalog.dart';

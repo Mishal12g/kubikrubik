@@ -11,7 +11,7 @@ import 'package:kubikrubik/ui/catalog_page/catalog_page.dart';
 import 'package:kubikrubik/ui/junior_page/junior_details_page.dart';
 import 'package:kubikrubik/ui/junior_page/junior_page.dart';
 import 'package:kubikrubik/ui/main_page/main_page.dart';
-import 'package:kubikrubik/ui/onboarding/onboarding_screen.dart';
+import 'package:kubikrubik/ui/onboarding_page/onboarding_page.dart';
 import 'package:kubikrubik/ui/records_page/records_page.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page.dart';
 
