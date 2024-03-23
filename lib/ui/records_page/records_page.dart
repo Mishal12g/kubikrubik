@@ -12,6 +12,7 @@ class RecordsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = Get.find<RecordPageController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Рекорды"),
@@ -28,10 +29,8 @@ class RecordsPage extends StatelessWidget {
                   child: GetBuilder<RecordPageController>(
                     builder: (RecordPageController controller) =>
                         ListView.builder(
-                      itemCount:
-                          Get.find<RecordPageController>().records.length,
+                      itemCount: c.records.length,
                       itemBuilder: (context, index) {
-                        final c = Get.find<RecordPageController>();
                         final reverse = c.records.reversed.toList();
                         final record = reverse[index];
                         if (index == 0) {

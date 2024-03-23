@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kubikrubik/models/catalog.dart';
+import 'package:kubikrubik/models/record_catalog.dart';
 import 'package:kubikrubik/services/onboarding.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page.dart';
@@ -16,10 +17,12 @@ import 'package:kubikrubik/ui/timer_page/timer_page.dart';
 
 Future<void> main(List<String> args) async {
   await Hive.initFlutter();
-  if (!Hive.isAdapterRegistered(1)) {
-    Hive.registerAdapter(CatalogAdapter());
-  }
+
+  Hive.registerAdapter(CatalogAdapter());
+  Hive.registerAdapter(RecordCatalogAdapter());
+
   await Hive.openBox<List>("Catalogs");
+  await Hive.openBox<List>("Records");
   await Hive.openBox<bool>("Onboarding");
 
   runApp(const MyApp());

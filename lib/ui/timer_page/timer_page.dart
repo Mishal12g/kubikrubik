@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:kubikrubik/halpers/date_formatters.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/timer_stopwatch.dart';
-import 'package:kubikrubik/models/record.dart';
+import 'package:kubikrubik/models/record_catalog.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
