@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 
 class FormTextFieldWidget extends StatelessWidget {
+  final bool? isEnabled;
   final String hintText;
   final String text;
   final Widget? widget;
@@ -22,6 +23,7 @@ class FormTextFieldWidget extends StatelessWidget {
     this.textInputType,
     this.formatterText,
     this.readOnly,
+    this.isEnabled,
   });
 
   @override
@@ -41,6 +43,7 @@ class FormTextFieldWidget extends StatelessWidget {
           decoration: const BoxDecoration(color: ColorsApp.blueButton),
           height: height,
           child: TextField(
+            enabled: isEnabled,
             style: const TextStyle(
                 fontSize: 16.0, height: 1.0, color: Colors.black),
             keyboardType: textInputType,

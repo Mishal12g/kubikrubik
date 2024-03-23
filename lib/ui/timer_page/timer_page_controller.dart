@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:kubikrubik/helpers/date_formatters.dart';
 import 'package:kubikrubik/models/catalog.dart';
@@ -15,6 +16,7 @@ class TimerPageController extends GetxController {
   int seconds = 0;
   bool isPlay = false;
   bool timerIsActive = false;
+
   late String selectedTime;
 
   String get timeResult => _timeResult;
@@ -80,6 +82,7 @@ class TimerPageController extends GetxController {
             if (selectedTime == _timeResult) {
               isPlay = false;
               stopTimer();
+              HapticFeedback.mediumImpact();
             }
           }
         },

@@ -53,11 +53,11 @@ class TimerPage extends StatelessWidget {
           Positioned(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ListView(
-                children: [
-                  const SizedBox(height: 10),
-                  GetBuilder<TimerPageController>(
-                    builder: (controller) => Row(
+              child: GetBuilder<TimerPageController>(
+                builder: (controller) => ListView(
+                  children: [
+                    const SizedBox(height: 10),
+                    Row(
                       children: [
                         const SizedBox(width: 40),
                         const Spacer(),
@@ -105,36 +105,39 @@ class TimerPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  ContainerWidget(
-                    widget: Column(
-                      children: [
-                        FormTextFieldWidget(
-                          controller: nameTextFieldController,
-                          text: "Название",
-                          hintText: "Новая тренировка",
-                        ),
-                        const SizedBox(height: 12),
-                        FormTextFieldWidget(
-                          readOnly: true,
-                          controller: selectTextFieldController,
-                          text: "Выберите кубик",
-                          hintText: "Кубик",
-                          widget: _PopUpSize(selectTextFieldController),
-                        ),
-                        const SizedBox(height: 24),
-                        const Divider(
-                          color: ColorsApp.blueButton,
-                        ),
-                        _MyTimerWidget(
-                          nameTextFieldController: nameTextFieldController,
-                          selectTextFieldController: selectTextFieldController,
-                        ),
-                      ],
+                    const SizedBox(height: 40),
+                    ContainerWidget(
+                      widget: Column(
+                        children: [
+                          FormTextFieldWidget(
+                            isEnabled: c.isPlay ? false : true,
+                            controller: nameTextFieldController,
+                            text: "Название",
+                            hintText: "Новая тренировка",
+                          ),
+                          const SizedBox(height: 12),
+                          FormTextFieldWidget(
+                            isEnabled: c.isPlay ? false : true,
+                            readOnly: true,
+                            controller: selectTextFieldController,
+                            text: "Выберите кубик",
+                            hintText: "Кубик",
+                            widget: _PopUpSize(selectTextFieldController),
+                          ),
+                          const SizedBox(height: 24),
+                          const Divider(
+                            color: ColorsApp.blueButton,
+                          ),
+                          _MyTimerWidget(
+                            nameTextFieldController: nameTextFieldController,
+                            selectTextFieldController:
+                                selectTextFieldController,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -252,50 +255,54 @@ class _MyTimerWidget extends StatelessWidget {
                         color: ColorsApp.blueButton,
                       ),
                       TextButton(
-                        onPressed: () => showCupertinoDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(2.0),
-                                ),
-                              ),
-                              surfaceTintColor: Colors.white,
-                              backgroundColor: Colors.white,
-                              content: SizedBox(
-                                height: 150,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: CupertinoPicker(
-                                        backgroundColor: Colors.white,
-                                        itemExtent: 32.0,
-                                        onSelectedItemChanged: (value) {
-                                          c.selectTime(value);
-                                        },
-                                        children: c.timeStrings
-                                            .map((e) => Text(e))
-                                            .toList(),
-                                      ),
+                        onPressed: () {
+                          if (!c.isPlay) {
+                            showCupertinoDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(2.0),
                                     ),
-                                    ButtonWidget(
-                                        color: ColorsApp.blue,
-                                        text: const Text(
-                                          "Выбрать",
-                                          style: TextStyle(
-                                            color: Colors.white,
+                                  ),
+                                  surfaceTintColor: Colors.white,
+                                  backgroundColor: Colors.white,
+                                  content: SizedBox(
+                                    height: 150,
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: CupertinoPicker(
+                                            backgroundColor: Colors.white,
+                                            itemExtent: 32.0,
+                                            onSelectedItemChanged: (value) {
+                                              c.selectTime(value);
+                                            },
+                                            children: c.timeStrings
+                                                .map((e) => Text(e))
+                                                .toList(),
                                           ),
                                         ),
-                                        onTap: () {
-                                          Get.back();
-                                        })
-                                  ],
-                                ),
-                              ),
+                                        ButtonWidget(
+                                            color: ColorsApp.blue,
+                                            text: const Text(
+                                              "Выбрать",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              Get.back();
+                                            })
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             );
-                          },
-                        ),
+                          }
+                        },
                         child: Row(
                           children: [
                             Text(
