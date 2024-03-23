@@ -13,6 +13,7 @@ import 'package:kubikrubik/ui/junior_page/junior_page.dart';
 import 'package:kubikrubik/ui/main_page/main_page.dart';
 import 'package:kubikrubik/ui/onboarding_page/onboarding_page.dart';
 import 'package:kubikrubik/ui/records_page/records_page.dart';
+import 'package:kubikrubik/ui/settings_page/settings_page.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page.dart';
 
 Future<void> main(List<String> args) async {
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         "/catalog_form_page": (context) => const CatalogFormPage(),
         "/timer_page": (context) => const TimerPage(),
         "/records_page": (context) => RecordsPage(),
+        "/settings_page": (context) => const SettingsPage(),
       },
     );
   }

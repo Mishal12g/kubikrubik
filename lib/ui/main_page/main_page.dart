@@ -68,7 +68,9 @@ class MainPage extends StatelessWidget {
                             title: 'Настройки',
                             color: ColorsApp.greyTile,
                             image: AppImages.settings,
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed("/settings_page");
+                            },
                           ),
                         ],
                       ),

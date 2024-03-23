@@ -37,4 +37,7 @@ class AppImages {
   static const String stopTwo = 'images/stopTwo.png';
   static const String playTwo = 'images/playTwo.png';
   static const String record = 'images/record.png';
+  static const String star = 'images/star.png';
+  static const String security = 'images/security.png';
+  static const String notes = 'images/notes.png';
 }
