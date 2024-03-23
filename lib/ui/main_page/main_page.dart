@@ -17,63 +17,64 @@ class MainPage extends StatelessWidget {
         children: [
           const BackgroundImageWidget(),
           Positioned(
-            top: 20,
-            bottom: 101,
-            left: 20,
-            right: 20,
             child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Кубик Рубика",
-                    style: TextStyle(
-                      fontSize: 36,
-                      color: ColorsApp.white,
-                      fontWeight: FontWeight.bold,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Кубик Рубика",
+                      style: TextStyle(
+                        fontSize: 36,
+                        color: ColorsApp.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: ListView(children: [
-                      const _JuniorTileWidget(),
-                      const SizedBox(height: 40),
-                      TileWidget(
-                        title: 'Алгоритмы',
-                        color: ColorsApp.blueTile,
-                        image: AppImages.algoritm,
-                        onTap: () {
-                          Get.toNamed("/algorithms_page");
-                        },
+                    const SizedBox(height: 20),
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          const _JuniorTileWidget(),
+                          const SizedBox(height: 40),
+                          TileWidget(
+                            title: 'Алгоритмы',
+                            color: ColorsApp.blueTile,
+                            image: AppImages.algoritm,
+                            onTap: () {
+                              Get.toNamed("/algorithms_page");
+                            },
+                          ),
+                          const SizedBox(height: 12),
+                          TileWidget(
+                            title: 'Каталог',
+                            color: ColorsApp.yellowTile,
+                            image: AppImages.catalog,
+                            onTap: () {
+                              Get.toNamed("/catalog_page");
+                            },
+                          ),
+                          const SizedBox(height: 12),
+                          TileWidget(
+                            title: 'Таймер',
+                            color: ColorsApp.greenTile,
+                            image: AppImages.timer,
+                            onTap: () {
+                              Get.toNamed("/timer_page");
+                            },
+                          ),
+                          const SizedBox(height: 40),
+                          TileWidget(
+                            title: 'Настройки',
+                            color: ColorsApp.greyTile,
+                            image: AppImages.settings,
+                            onTap: () {},
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 12),
-                      TileWidget(
-                        title: 'Каталог',
-                        color: ColorsApp.yellowTile,
-                        image: AppImages.catalog,
-                        onTap: () {
-                          Get.toNamed("/catalog_page");
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      TileWidget(
-                        title: 'Таймер',
-                        color: ColorsApp.greenTile,
-                        image: AppImages.timer,
-                        onTap: () {
-                          Get.toNamed("/timer_page");
-                        },
-                      ),
-                      const SizedBox(height: 40),
-                      TileWidget(
-                        title: 'Настройки',
-                        color: ColorsApp.greyTile,
-                        image: AppImages.settings,
-                        onTap: () {},
-                      ),
-                    ]),
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
           )
