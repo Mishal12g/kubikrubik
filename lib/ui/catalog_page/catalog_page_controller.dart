@@ -23,8 +23,13 @@ class CatalogPageController extends GetxController {
     loadCatalogs();
   }
 
-  deleteCatalog(int index) {
-    service.delete(index);
+  editCatalog(Catalog catalog) {
+    service.edit(catalog);
+    loadCatalogs();
+  }
+
+  deleteCatalog(Catalog catalog) {
+    service.delete(catalog);
     update();
   }
 }

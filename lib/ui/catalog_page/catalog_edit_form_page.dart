@@ -13,18 +13,21 @@ import 'package:kubikrubik/ui/components/button_widget.dart';
 import 'package:kubikrubik/ui/components/container_widget.dart';
 import 'package:kubikrubik/ui/components/form_text_field_widget.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page_controller.dart';
-import 'package:uuid/uuid.dart';
 
-class CatalogFormPage extends StatelessWidget {
-  const CatalogFormPage({super.key});
+class CatalogEditFormPage extends StatelessWidget {
+  const CatalogEditFormPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final c = Get.find<CatalogPageController>();
 
+    final catalog = Get.arguments as Catalog;
     final TextEditingController nameController = TextEditingController();
     final TextEditingController sizeController = TextEditingController();
     final TextEditingController commentController = TextEditingController();
+    nameController.text = catalog.name;
+    sizeController.text = catalog.size;
+    commentController.text = catalog.comment ?? "";
 
     return Scaffold(
       backgroundColor: ColorsApp.backgroundColor,
@@ -88,19 +91,19 @@ class CatalogFormPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 _SaveCatalogButtonWidget(
                   onTap: () {
-                    final catalog = Catalog(
+                    final editCatalog = Catalog(
                       name: nameController.text,
                       size: sizeController.text,
                       comment: commentController.text.isNotEmpty
                           ? commentController.text
                           : null,
                       photo: null,
-                      id: const Uuid().v4(),
+                      id: catalog.id,
                     );
 
                     if (nameController.text.isNotEmpty &&
                         sizeController.text.isNotEmpty) {
-                      c.addCatalog(catalog);
+                      c.editCatalog(editCatalog);
                       Get.find<TimerPageController>().loadCatalogs();
                       Get.back();
                     }

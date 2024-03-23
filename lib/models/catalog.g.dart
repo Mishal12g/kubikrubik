@@ -17,6 +17,7 @@ class CatalogAdapter extends TypeAdapter<Catalog> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Catalog(
+      id: fields[5] as String,
       name: fields[0] as String,
       size: fields[1] as String,
       comment: fields[2] as String?,
@@ -27,7 +28,7 @@ class CatalogAdapter extends TypeAdapter<Catalog> {
   @override
   void write(BinaryWriter writer, Catalog obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class CatalogAdapter extends TypeAdapter<Catalog> {
       ..writeByte(2)
       ..write(obj.comment)
       ..writeByte(3)
-      ..write(obj.photo);
+      ..write(obj.photo)
+      ..writeByte(5)
+      ..write(obj.id);
   }
 
   @override

@@ -61,7 +61,10 @@ class CatalogPage extends StatelessWidget {
                                         await _showDeleteCatalogAlertDialog(
                                             context, index, catalog);
                                       },
-                                      editOnTap: () {},
+                                      editOnTap: () {
+                                        Get.toNamed("/catalog_edit_form_page",
+                                            arguments: catalog);
+                                      },
                                     ),
                                     onTap: () async {
                                       await _showAlertDetailsCatalog(
@@ -136,7 +139,7 @@ class CatalogPage extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Get.find<CatalogPageController>().deleteCatalog(index);
+                    Get.find<CatalogPageController>().deleteCatalog(catalog);
                     Get.find<TimerPageController>().loadCatalogs();
 
                     Get.back();
@@ -180,7 +183,11 @@ class CatalogPage extends StatelessWidget {
                             icon: const Image(
                               image: AssetImage(AppImages.edit),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.back();
+                              Get.toNamed("/catalog_edit_form_page",
+                                  arguments: catalog);
+                            },
                           ),
                           onTap: () {},
                         ),
@@ -256,56 +263,46 @@ class _CatalogTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ContainerWidget(
-          edgeInsets: edgeInsets ?? const EdgeInsets.all(12),
-          widget: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                width: 62,
-                height: 62,
-                decoration: BoxDecoration(
-                  color: ColorsApp.greyTile,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Image(
-                  image: AssetImage(image ?? AppImages.cube1),
-                ),
+    return InkWell(
+      child: ContainerWidget(
+        edgeInsets: edgeInsets ?? const EdgeInsets.all(12),
+        widget: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              width: 62,
+              height: 62,
+              decoration: BoxDecoration(
+                color: ColorsApp.greyTile,
+                borderRadius: BorderRadius.circular(100),
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(size),
-                  ],
-                ),
+              child: Image(
+                image: AssetImage(image ?? AppImages.cube1),
               ),
-              const SizedBox(width: 12),
-              button ?? const SizedBox(),
-            ],
-          ),
-        ),
-        Positioned.fill(
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: () => onTap(),
-              borderRadius: BorderRadius.circular(2),
             ),
-          ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(size),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            button ?? const SizedBox(),
+          ],
         ),
-      ],
+      ),
+      onTap: () => onTap(),
     );
   }
 }

@@ -18,8 +18,21 @@ class CatalogService {
     await box.put(_listCatalogs, _catalogs);
   }
 
-  delete(int index) async {
+  delete(Catalog catalog) async {
+    final index = _catalogs.indexWhere((element) {
+      return element.id == catalog.id;
+    });
+
     _catalogs.removeAt(index);
+    await box.put(_listCatalogs, _catalogs);
+  }
+
+  edit(Catalog catalog) async {
+    final index = _catalogs.indexWhere((element) {
+      return element.id == catalog.id;
+    });
+
+    _catalogs[index] = catalog;
     await box.put(_listCatalogs, _catalogs);
   }
 }

@@ -6,6 +6,7 @@ import 'package:kubikrubik/models/record_catalog.dart';
 import 'package:kubikrubik/services/onboarding.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page.dart';
+import 'package:kubikrubik/ui/catalog_page/catalog_edit_form_page.dart';
 import 'package:kubikrubik/ui/catalog_page/catalog_form_page.dart';
 import 'package:kubikrubik/ui/catalog_page/catalog_page.dart';
 import 'package:kubikrubik/ui/junior_page/junior_details_page.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         "/timer_page": (context) => const TimerPage(),
         "/records_page": (context) => RecordsPage(),
         "/settings_page": (context) => const SettingsPage(),
+        "/catalog_edit_form_page": (context) => const CatalogEditFormPage(),
       },
     );
   }
