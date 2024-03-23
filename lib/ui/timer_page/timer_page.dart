@@ -213,159 +213,200 @@ class _MyTimerWidget extends StatelessWidget {
       builder: (_) {
         switch (c.timerOrStopwatch) {
           case TimerStopwatch.timer:
-            return Column(
-              children: [
-                TimerButtonWidget(
-                  isPlay: c.isPlay,
-                  action: () {
-                    if (selectTextFieldController.text.isNotEmpty &&
-                        nameTextFieldController.text.isNotEmpty) {
-                      c.isPlay = !c.isPlay;
-                      if (c.isPlay) {
-                        c.startTimer();
-                      } else {
-                        c.stopTimer();
-
-                        final record = RecordCatalog(
-                          date: Formattes.dateAndTime(),
-                          size: c.catalog?.size ?? "not size",
-                          name: nameTextFieldController.text,
-                          seconds: c.seconds,
-                        );
-
-                        Get.find<RecordPageController>().addRecords(record);
-                      }
-                    }
-                  },
-                ),
-                Center(
-                  child: Text(
-                    c.timeResult,
-                    style: const TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 130,
-                  child: Column(
-                    children: [
-                      const Divider(
-                        color: ColorsApp.blueButton,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          if (!c.isPlay) {
-                            showCupertinoDialog<String>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(2.0),
-                                    ),
-                                  ),
-                                  surfaceTintColor: Colors.white,
-                                  backgroundColor: Colors.white,
-                                  content: SizedBox(
-                                    height: 150,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          child: CupertinoPicker(
-                                            backgroundColor: Colors.white,
-                                            itemExtent: 32.0,
-                                            onSelectedItemChanged: (value) {
-                                              c.selectTime(value);
-                                            },
-                                            children: c.timeStrings
-                                                .map((e) => Text(e))
-                                                .toList(),
-                                          ),
-                                        ),
-                                        ButtonWidget(
-                                            color: ColorsApp.blue,
-                                            text: const Text(
-                                              "Выбрать",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            onTap: () {
-                                              Get.back();
-                                            })
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              c.selectedTime,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.black,
-                              ),
-                            ),
-                            const SizedBox(width: 15),
-                            const Image(
-                              width: 25,
-                              height: 25,
-                              fit: BoxFit.contain,
-                              image: AssetImage(AppImages.hourglass),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            );
+            return _TimerWidget(
+                c: c,
+                selectTextFieldController: selectTextFieldController,
+                nameTextFieldController: nameTextFieldController);
           case TimerStopwatch.stopwatch:
-            return Column(
-              children: [
-                TimerButtonWidget(
-                  isPlay: c.isPlay,
-                  action: () {
-                    if (selectTextFieldController.text.isNotEmpty &&
-                        nameTextFieldController.text.isNotEmpty) {
-                      c.isPlay = !c.isPlay;
-                      if (c.isPlay) {
-                        c.startTimer();
-                      } else {
-                        c.stopTimer();
-                        final record = RecordCatalog(
-                          date: DateTime.now().toString(),
-                          size: c.catalog?.size ?? "not size",
-                          name: nameTextFieldController.text,
-                          seconds: c.seconds,
-                        );
-
-                        Get.find<RecordPageController>().addRecords(record);
-                      }
-                    }
-                  },
-                ),
-                Center(
-                  child: Text(
-                    c.timeResult,
-                    style: const TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            );
+            return _StopWatchWidget(
+                c: c,
+                selectTextFieldController: selectTextFieldController,
+                nameTextFieldController: nameTextFieldController);
         }
       },
+    );
+  }
+}
+
+class _StopWatchWidget extends StatelessWidget {
+  const _StopWatchWidget({
+    super.key,
+    required this.c,
+    required this.selectTextFieldController,
+    required this.nameTextFieldController,
+  });
+
+  final TimerPageController c;
+  final TextEditingController selectTextFieldController;
+  final TextEditingController nameTextFieldController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TimerButtonWidget(
+          isPlay: c.isPlay,
+          action: () {
+            if (selectTextFieldController.text.isNotEmpty &&
+                nameTextFieldController.text.isNotEmpty) {
+              c.isPlay = !c.isPlay;
+              if (c.isPlay) {
+                c.startTimer();
+              } else {
+                c.stopTimer();
+                final record = RecordCatalog(
+                  date: DateTime.now().toString(),
+                  size: c.catalog?.size ?? "not size",
+                  name: nameTextFieldController.text,
+                  seconds: c.seconds,
+                );
+
+                Get.find<RecordPageController>().addRecords(record);
+              }
+            }
+          },
+        ),
+        Center(
+          child: Text(
+            c.timeResult,
+            style: const TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TimerWidget extends StatelessWidget {
+  const _TimerWidget({
+    required this.c,
+    required this.selectTextFieldController,
+    required this.nameTextFieldController,
+  });
+
+  final TimerPageController c;
+  final TextEditingController selectTextFieldController;
+  final TextEditingController nameTextFieldController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TimerButtonWidget(
+          isPlay: c.isPlay,
+          action: () {
+            if (selectTextFieldController.text.isNotEmpty &&
+                nameTextFieldController.text.isNotEmpty) {
+              c.isPlay = !c.isPlay;
+              if (c.isPlay) {
+                c.startTimer();
+              } else {
+                c.stopTimer();
+
+                final record = RecordCatalog(
+                  date: Formattes.dateAndTime(),
+                  size: c.catalog?.size ?? "not size",
+                  name: nameTextFieldController.text,
+                  seconds: c.seconds,
+                );
+
+                Get.find<RecordPageController>().addRecords(record);
+              }
+            }
+          },
+        ),
+        Center(
+          child: Text(
+            c.timeResult,
+            style: const TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 130,
+          child: Column(
+            children: [
+              const Divider(
+                color: ColorsApp.blueButton,
+              ),
+              TextButton(
+                onPressed: () {
+                  if (!c.isPlay) {
+                    showCupertinoDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(2.0),
+                            ),
+                          ),
+                          surfaceTintColor: Colors.white,
+                          backgroundColor: Colors.white,
+                          content: SizedBox(
+                            height: 150,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: CupertinoPicker(
+                                    backgroundColor: Colors.white,
+                                    itemExtent: 32.0,
+                                    onSelectedItemChanged: (value) {
+                                      c.selectTime(value);
+                                    },
+                                    children: c.timeStrings
+                                        .map((e) => Text(e))
+                                        .toList(),
+                                  ),
+                                ),
+                                ButtonWidget(
+                                    color: ColorsApp.blue,
+                                    text: const Text(
+                                      "Выбрать",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Get.back();
+                                    })
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      c.selectedTime,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(width: 15),
+                    const Image(
+                      width: 25,
+                      height: 25,
+                      fit: BoxFit.contain,
+                      image: AssetImage(AppImages.hourglass),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

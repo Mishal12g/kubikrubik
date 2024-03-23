@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         "/catalog_page": (context) => const CatalogPage(),
         "/catalog_form_page": (context) => const CatalogFormPage(),
         "/timer_page": (context) => const TimerPage(),
-        "/records_page": (context) => const RecordsPage(),
+        "/records_page": (context) => RecordsPage(),
       },
     );
   }

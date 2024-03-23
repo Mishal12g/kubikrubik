@@ -1,4 +1,5 @@
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:kubikrubik/models/enums/records_state.dart';
 import 'package:kubikrubik/models/record_catalog.dart';
 import 'package:kubikrubik/services/records_service.dart';
 
@@ -6,9 +7,22 @@ class RecordPageController extends GetxController {
   final RecordService _recordService = RecordService();
 
   List<RecordCatalog> records = [];
+  RecordsState _recordsState = RecordsState.myRecords;
+  RecordsState get recordsState => _recordsState;
 
   RecordPageController() {
     loadRecords();
+  }
+
+  selectRecordState(RecordsState recordsState) {
+    switch (_recordsState) {
+      case RecordsState.myRecords:
+        _recordsState = recordsState;
+        update();
+      case RecordsState.worldRecords:
+        _recordsState = recordsState;
+        update();
+    }
   }
 
   addRecords(RecordCatalog record) {
