@@ -82,7 +82,7 @@ class TimerPageController extends GetxController {
             if (selectedTime == _timeResult) {
               isPlay = false;
               stopTimer();
-              HapticFeedback.mediumImpact();
+              HapticFeedback.vibrate();
             }
           }
         },
