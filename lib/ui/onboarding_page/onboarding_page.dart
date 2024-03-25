@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kubikrubik/UI/components/onboarding_widget.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
+import 'package:kubikrubik/services/settings_service.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
 import 'package:kubikrubik/ui/components/button_widget.dart';
 import 'package:kubikrubik/ui/onboarding_page/onboarding_controller.dart';
@@ -63,7 +64,9 @@ class _ReferenceButtonsWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            SettingsService.termsAndAgreement();
+          },
           child: const Text(
             "Условия использования",
             style: TextStyle(fontSize: 10, color: ColorsApp.grey),
@@ -75,7 +78,9 @@ class _ReferenceButtonsWidget extends StatelessWidget {
           color: ColorsApp.grey,
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            SettingsService.launchURL();
+          },
           child: const Text(
             "Политика конфиденциальности",
             style: TextStyle(fontSize: 10, color: ColorsApp.grey),

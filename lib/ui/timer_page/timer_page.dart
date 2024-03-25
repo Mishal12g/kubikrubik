@@ -114,16 +114,10 @@ class TimerPage extends StatelessWidget {
                             controller: nameTextFieldController,
                             text: "Название",
                             hintText: "Новая тренировка",
+                            onTap: () {},
                           ),
                           const SizedBox(height: 12),
-                          FormTextFieldWidget(
-                            isEnabled: c.isPlay ? false : true,
-                            readOnly: true,
-                            controller: selectTextFieldController,
-                            text: "Выберите кубик",
-                            hintText: "Кубик",
-                            widget: _PopUpSize(selectTextFieldController),
-                          ),
+                          _PopUpSize(selectTextFieldController),
                           const SizedBox(height: 24),
                           const Divider(
                             color: ColorsApp.blueButton,
@@ -165,33 +159,56 @@ class _PopUpSize extends StatelessWidget {
   Widget build(BuildContext context) {
     TimerPageController c = Get.find<TimerPageController>();
 
-    return PopupMenuButton<Catalog>(
-      color: Colors.white,
-      surfaceTintColor: Colors.white,
-      icon: const Image(
+    return FormTextFieldWidget(
+      controller: sizeController,
+      readOnly: true,
+      hintText: 'Кубик',
+      text: 'Выберите кубик',
+      widget: const Image(
+        width: 24,
+        height: 24,
         image: AssetImage(AppImages.popUpClose),
       ),
-      itemBuilder: (BuildContext context) {
-        return c.catalogs.map(
-          (Catalog item) {
-            return PopupMenuItem<Catalog>(
-              value: item,
-              child: item == c.catalogs.first
-                  ? Row(
-                      children: [
-                        Text(item.name),
-                        const Spacer(),
-                        const Image(image: AssetImage(AppImages.popUpOpen))
-                      ],
-                    )
-                  : Text(item.name),
-            );
-          },
-        ).toList();
-      },
-      onSelected: (Catalog selectedValue) {
-        sizeController.text = selectedValue.name;
-        c.catalog = selectedValue;
+      onTap: () {
+        final RenderBox textFieldRenderBox =
+            context.findRenderObject() as RenderBox;
+        final textFieldPosition = textFieldRenderBox.localToGlobal(Offset.zero);
+        if (c.catalogs.isNotEmpty) {
+          showMenu(
+            color: Colors.white,
+            surfaceTintColor: Colors.white,
+            context: context,
+            position: RelativeRect.fromLTRB(
+              textFieldPosition.dx + textFieldRenderBox.size.width,
+              textFieldPosition.dy + textFieldRenderBox.size.height,
+              35,
+              textFieldPosition.dy + textFieldRenderBox.size.height * 2,
+            ),
+            items: c.catalogs.map(
+              (Catalog item) {
+                return PopupMenuItem<Catalog>(
+                  value: item,
+                  child: item == c.catalogs.first
+                      ? Row(
+                          children: [
+                            Text(item.name),
+                            const Spacer(),
+                            const Image(image: AssetImage(AppImages.popUpOpen))
+                          ],
+                        )
+                      : Text(item.name),
+                );
+              },
+            ).toList(),
+          ).then(
+            (value) {
+              if (value != null) {
+                sizeController.text = value.name;
+                c.catalog = value;
+              }
+            },
+          );
+        }
       },
     );
   }
@@ -230,7 +247,6 @@ class _MyTimerWidget extends StatelessWidget {
 
 class _StopWatchWidget extends StatelessWidget {
   const _StopWatchWidget({
-    super.key,
     required this.c,
     required this.selectTextFieldController,
     required this.nameTextFieldController,

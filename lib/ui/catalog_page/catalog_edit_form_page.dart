@@ -60,22 +60,17 @@ class CatalogEditFormPage extends StatelessWidget {
                         controller: nameController,
                         text: "Название",
                         hintText: "Новый кубик",
+                        onTap: () {},
                       ),
                       const SizedBox(height: 12),
-                      FormTextFieldWidget(
-                        readOnly: true,
-                        formatterText: FilteringTextInputFormatter.digitsOnly,
-                        controller: sizeController,
-                        text: "Размер",
-                        hintText: "3*3",
-                        widget: _PopUpSize(sizeController),
-                      ),
+                      _PopUpSize(sizeController),
                       const SizedBox(height: 12),
                       FormTextFieldWidget(
                         controller: commentController,
                         text: "Комментарий",
                         hintText: "Новый кубик",
                         height: 100,
+                        onTap: () {},
                       ),
                     ],
                   ),
@@ -176,47 +171,74 @@ class _PopUpSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<SampleItem>(
-      icon: const Image(
+    return FormTextFieldWidget(
+      controller: sizeController,
+      readOnly: true,
+      hintText: '3*3',
+      text: 'Размер',
+      widget: const Image(
+        width: 24,
+        height: 24,
         image: AssetImage(AppImages.popUpClose),
       ),
-      onSelected: (SampleItem item) {
-        switch (item) {
-          case SampleItem.itemOne:
-            sizeController.text = "2*2";
-          case SampleItem.itemTwo:
-            sizeController.text = "3*3";
-          case SampleItem.itemThree:
-            sizeController.text = "4*4";
-          case SampleItem.other:
-            sizeController.text = "Другое";
-        }
-      },
-      color: Colors.white,
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
-        const PopupMenuItem<SampleItem>(
-          value: SampleItem.itemOne,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('2*2'),
-              Image(image: AssetImage(AppImages.popUpOpen))
-            ],
+      onTap: () {
+        final RenderBox textFieldRenderBox =
+            context.findRenderObject() as RenderBox;
+        final textFieldPosition = textFieldRenderBox.localToGlobal(Offset.zero);
+
+        showMenu(
+          color: Colors.white,
+          surfaceTintColor: Colors.white,
+          context: context,
+          position: RelativeRect.fromLTRB(
+            textFieldPosition.dx + textFieldRenderBox.size.width,
+            textFieldPosition.dy + textFieldRenderBox.size.height,
+            35,
+            textFieldPosition.dy + textFieldRenderBox.size.height * 2,
           ),
-        ),
-        const PopupMenuItem<SampleItem>(
-          value: SampleItem.itemTwo,
-          child: Text('3*3'),
-        ),
-        const PopupMenuItem<SampleItem>(
-          value: SampleItem.itemThree,
-          child: Text('4*4'),
-        ),
-        const PopupMenuItem<SampleItem>(
-          value: SampleItem.other,
-          child: Text('Другое'),
-        ),
-      ],
+          items: [
+            const PopupMenuItem(
+              value: SampleItem.itemOne,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('2*2'),
+                  Image(image: AssetImage(AppImages.popUpOpen))
+                ],
+              ),
+            ),
+            const PopupMenuItem(
+              value: SampleItem.itemTwo,
+              child: Text('3*3'),
+            ),
+            const PopupMenuItem(
+              value: SampleItem.itemThree,
+              child: Text('4*4'),
+            ),
+            const PopupMenuItem(
+              value: SampleItem.other,
+              child: Text('Другое'),
+            ),
+          ],
+        ).then((value) {
+          if (value != null) {
+            switch (value) {
+              case SampleItem.itemOne:
+                sizeController.text = "2*2";
+                break;
+              case SampleItem.itemTwo:
+                sizeController.text = "3*3";
+                break;
+              case SampleItem.itemThree:
+                sizeController.text = "4*4";
+                break;
+              case SampleItem.other:
+                sizeController.text = "Другое";
+                break;
+            }
+          }
+        });
+      },
     );
   }
 }

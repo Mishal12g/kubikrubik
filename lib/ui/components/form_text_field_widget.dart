@@ -12,6 +12,7 @@ class FormTextFieldWidget extends StatelessWidget {
   final TextInputType? textInputType;
   final TextInputFormatter? formatterText;
   final bool? readOnly;
+  final Function onTap;
 
   const FormTextFieldWidget({
     super.key,
@@ -24,6 +25,7 @@ class FormTextFieldWidget extends StatelessWidget {
     this.formatterText,
     this.readOnly,
     this.isEnabled,
+    required this.onTap,
   });
 
   @override
@@ -43,6 +45,7 @@ class FormTextFieldWidget extends StatelessWidget {
           decoration: const BoxDecoration(color: ColorsApp.blueButton),
           height: height,
           child: TextField(
+            onTap: () => onTap(),
             enabled: isEnabled,
             style: const TextStyle(
                 fontSize: 16.0, height: 1.0, color: Colors.black),
