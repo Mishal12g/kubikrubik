@@ -1,8 +1,25 @@
+import 'dart:typed_data';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/services/catalogs_services.dart';
 
 class CatalogPageController extends GetxController {
+  Uint8List? image;
+
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      image = await pickedFile.readAsBytes();
+      update();
+    } else {
+      print('No image selected.');
+    }
+  }
+
   final CatalogService service = CatalogService();
 
   List<Catalog> _catalogs = [];
@@ -21,11 +38,13 @@ class CatalogPageController extends GetxController {
   addCatalog(Catalog catalog) {
     service.add(catalog);
     loadCatalogs();
+    image = null;
   }
 
   editCatalog(Catalog catalog) {
     service.edit(catalog);
     loadCatalogs();
+    image = null;
   }
 
   deleteCatalog(Catalog catalog) {

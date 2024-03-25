@@ -21,7 +21,7 @@ class CatalogAdapter extends TypeAdapter<Catalog> {
       name: fields[0] as String,
       size: fields[1] as String,
       comment: fields[2] as String?,
-      photo: fields[3] as String?,
+      image: fields[8] as Uint8List?,
     );
   }
 
@@ -35,10 +35,10 @@ class CatalogAdapter extends TypeAdapter<Catalog> {
       ..write(obj.size)
       ..writeByte(2)
       ..write(obj.comment)
-      ..writeByte(3)
-      ..write(obj.photo)
       ..writeByte(5)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(8)
+      ..write(obj.image);
   }
 
   @override

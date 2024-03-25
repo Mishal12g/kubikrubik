@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -44,43 +47,47 @@ class CatalogPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Stack(
                         children: [
-                          ListView.builder(
-                            itemCount: c.catalogs.length,
-                            itemBuilder: (context, index) {
-                              final catalog = c.catalogs[index];
+                          Column(
+                            children: [
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: c.catalogs.length,
+                                  itemBuilder: (context, index) {
+                                    final catalog = c.catalogs[index];
 
-                              return Column(
-                                children: [
-                                  if (index == 0) const SizedBox(height: 20),
-                                  _CatalogTileWidget(
-                                    name: catalog.name,
-                                    size: catalog.size,
-                                    image: catalog.photo,
-                                    button: _EditAndDeleteCatalogPopUP(
-                                      deleteOnTap: () async {
-                                        await _showDeleteCatalogAlertDialog(
-                                            context, index, catalog);
-                                      },
-                                      editOnTap: () {
-                                        Get.toNamed("/catalog_edit_form_page",
-                                            arguments: catalog);
-                                      },
-                                    ),
-                                    onTap: () async {
-                                      await _showAlertDetailsCatalog(
-                                          context, catalog);
-                                    },
-                                  ),
-                                  const SizedBox(height: 12),
-                                ],
-                              );
-                            },
-                          ),
-                          const Positioned(
-                            bottom: 40,
-                            left: 0,
-                            right: 0,
-                            child: _AddCatalogButtonWidget(),
+                                    return Column(
+                                      children: [
+                                        if (index == 0)
+                                          const SizedBox(height: 20),
+                                        _CatalogTileWidget(
+                                          name: catalog.name,
+                                          size: catalog.size,
+                                          image: catalog.image,
+                                          button: _EditAndDeleteCatalogPopUP(
+                                            deleteOnTap: () async {
+                                              await _showDeleteCatalogAlertDialog(
+                                                  context, index, catalog);
+                                            },
+                                            editOnTap: () {
+                                              Get.toNamed(
+                                                  "/catalog_edit_form_page",
+                                                  arguments: catalog);
+                                            },
+                                          ),
+                                          onTap: () async {
+                                            await _showAlertDetailsCatalog(
+                                                context, catalog);
+                                          },
+                                        ),
+                                        const SizedBox(height: 12),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                              const SafeArea(child: _AddCatalogButtonWidget()),
+                              const SizedBox(height: 12),
+                            ],
                           ),
                         ],
                       ),
@@ -178,7 +185,7 @@ class CatalogPage extends StatelessWidget {
                           edgeInsets: const EdgeInsets.all(0),
                           name: catalog.name,
                           size: catalog.size,
-                          image: catalog.photo,
+                          image: catalog.image,
                           button: IconButton(
                             icon: const Image(
                               image: AssetImage(AppImages.edit),
@@ -245,7 +252,7 @@ class _AddCatalogButtonWidget extends StatelessWidget {
 }
 
 class _CatalogTileWidget extends StatelessWidget {
-  final String? image;
+  final Uint8List? image;
   final String name;
   final String size;
   final Function onTap;
@@ -269,16 +276,27 @@ class _CatalogTileWidget extends StatelessWidget {
         widget: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(10),
               width: 62,
               height: 62,
               decoration: BoxDecoration(
                 color: ColorsApp.greyTile,
                 borderRadius: BorderRadius.circular(100),
               ),
-              child: Image(
-                image: AssetImage(image ?? AppImages.cube1),
-              ),
+              child: image != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.memory(
+                        image ?? Uint8List(0),
+                        width: double.infinity,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    )
+                  : const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Image(
+                        image: AssetImage(AppImages.cube1),
+                      ),
+                    ),
             ),
             const SizedBox(width: 12),
             Expanded(

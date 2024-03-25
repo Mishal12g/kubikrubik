@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/sample_item.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
@@ -46,17 +44,53 @@ class CatalogFormPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 179,
-                            height: 179,
-                            decoration: BoxDecoration(
-                                color: ColorsApp.blueButton,
-                                borderRadius: BorderRadius.circular(100)),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: const Image(
-                                  image: AssetImage(AppImages.addPhoto),
-                                )),
+                          GetBuilder<CatalogPageController>(
+                            builder: (controller) => Container(
+                              width: 179,
+                              height: 179,
+                              decoration: BoxDecoration(
+                                  color: ColorsApp.blueButton,
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: c.image != null
+                                  ? Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child: Image.memory(
+                                            c.image!,
+                                            fit: BoxFit.fitWidth,
+                                            width: double.infinity,
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 0,
+                                          right: 0,
+                                          child: SizedBox(
+                                            width: 35,
+                                            height: 35,
+                                            child: IconButton(
+                                              icon: const Image(
+                                                image: AssetImage(
+                                                  AppImages.addPhoto,
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                c.getImage();
+                                              },
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : IconButton(
+                                      onPressed: () {
+                                        c.getImage();
+                                      },
+                                      icon: const Image(
+                                        image: AssetImage(AppImages.addPhoto),
+                                      )),
+                            ),
                           ),
                         ],
                       ),
@@ -94,7 +128,7 @@ class CatalogFormPage extends StatelessWidget {
                       comment: commentController.text.isNotEmpty
                           ? commentController.text
                           : null,
-                      photo: null,
+                      image: c.image,
                       id: const Uuid().v4(),
                     );
 

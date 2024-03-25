@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:hive/hive.dart';
 
 part 'catalog.g.dart';
@@ -10,16 +12,16 @@ class Catalog {
   final String size;
   @HiveField(2)
   final String? comment;
-  @HiveField(3)
-  final String? photo;
   @HiveField(5)
   final String id;
+  @HiveField(8)
+  final Uint8List? image;
 
   Catalog({
     required this.id,
     required this.name,
     required this.size,
     required this.comment,
-    required this.photo,
+    required this.image,
   });
 }
