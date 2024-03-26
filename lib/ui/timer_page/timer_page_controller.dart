@@ -56,6 +56,11 @@ class TimerPageController extends GetxController {
     }
   }
 
+  clearResult() {
+    _timeResult = "00:00";
+    selectedTime = "01:00";
+  }
+
   loadCatalogs() {
     _catalogService.load();
     _catalogs = _catalogService.catalogs;
