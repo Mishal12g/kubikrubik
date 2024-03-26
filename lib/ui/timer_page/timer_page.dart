@@ -16,8 +16,22 @@ import 'package:kubikrubik/ui/components/timer_button_widget.dart';
 import 'package:kubikrubik/ui/records_page/records_page_controller.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page_controller.dart';
 
-class TimerPage extends StatelessWidget {
+class TimerPage extends StatefulWidget {
   const TimerPage({super.key});
+
+  @override
+  State<TimerPage> createState() => _TimerPageState();
+}
+
+class _TimerPageState extends State<TimerPage> {
+  @override
+  void dispose() {
+    super.dispose();
+    final c = Get.find<TimerPageController>();
+    c.clearResult();
+    c.stopTimer();
+    c.setTimerOrStopwatch(TimerStopwatch.timer);
+  }
 
   @override
   Widget build(BuildContext context) {
