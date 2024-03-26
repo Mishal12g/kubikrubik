@@ -221,6 +221,8 @@ class CatalogPage extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
+                              maxLines: 10,
+                              overflow: TextOverflow.ellipsis,
                               catalog.comment ?? "Пусто",
                               textAlign: TextAlign.left,
                               style: GoogleFonts.rubik(
