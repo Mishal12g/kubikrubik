@@ -14,20 +14,8 @@ import 'package:kubikrubik/ui/components/container_widget.dart';
 import 'package:kubikrubik/ui/components/form_text_field_widget.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page_controller.dart';
 
-class CatalogEditFormPage extends StatefulWidget {
+class CatalogEditFormPage extends StatelessWidget {
   const CatalogEditFormPage({super.key});
-
-  @override
-  State<CatalogEditFormPage> createState() => _CatalogEditFormPageState();
-}
-
-class _CatalogEditFormPageState extends State<CatalogEditFormPage> {
-  @override
-  void dispose() {
-    super.dispose();
-    final c = Get.find<CatalogPageController>();
-    c.image = null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +107,7 @@ class _CatalogEditFormPageState extends State<CatalogEditFormPage> {
   }
 }
 
-class _AvatarImageWidget extends StatelessWidget {
+class _AvatarImageWidget extends StatefulWidget {
   final Uint8List? image;
   final CatalogPageController c;
 
@@ -129,6 +117,17 @@ class _AvatarImageWidget extends StatelessWidget {
   });
 
   @override
+  State<_AvatarImageWidget> createState() => _AvatarImageWidgetState();
+}
+
+class _AvatarImageWidgetState extends State<_AvatarImageWidget> {
+  @override
+  void dispose() {
+    super.dispose();
+    widget.c.image = null;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: 179,
@@ -136,15 +135,17 @@ class _AvatarImageWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: ColorsApp.blueButton,
           borderRadius: BorderRadius.circular(100)),
-      child: image != null
+      child: widget.image != null
           ? Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.memory(
-                    image!,
-                    fit: BoxFit.fitWidth,
-                    width: double.infinity,
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.memory(
+                      widget.image!,
+                      fit: BoxFit.fitWidth,
+                      width: double.infinity,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -160,7 +161,7 @@ class _AvatarImageWidget extends StatelessWidget {
                         ),
                       ),
                       onPressed: () async {
-                        await _showModalBottomSheet(context, c);
+                        await _showModalBottomSheet(context, widget.c);
                       },
                     ),
                   ),
@@ -169,7 +170,7 @@ class _AvatarImageWidget extends StatelessWidget {
             )
           : IconButton(
               onPressed: () async {
-                await _showModalBottomSheet(context, c);
+                await _showModalBottomSheet(context, widget.c);
               },
               icon: const Image(
                 image: AssetImage(AppImages.addPhoto),

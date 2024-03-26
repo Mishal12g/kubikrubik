@@ -67,15 +67,7 @@ class _CatalogFormPageState extends State<CatalogFormPage> {
                               child: c.image != null
                                   ? Stack(
                                       children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          child: Image.memory(
-                                            c.image!,
-                                            fit: BoxFit.fitWidth,
-                                            width: double.infinity,
-                                          ),
-                                        ),
+                                        _AvatarWidget(c: c),
                                         Positioned(
                                           bottom: 0,
                                           right: 0,
@@ -197,6 +189,28 @@ class _CatalogFormPageState extends State<CatalogFormPage> {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AvatarWidget extends StatelessWidget {
+  const _AvatarWidget({
+    required this.c,
+  });
+
+  final CatalogPageController c;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Image.memory(
+          c.image!,
+          fit: BoxFit.fitWidth,
+          width: double.infinity,
         ),
       ),
     );
