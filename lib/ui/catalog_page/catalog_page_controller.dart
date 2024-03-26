@@ -9,8 +9,8 @@ class CatalogPageController extends GetxController {
 
   final picker = ImagePicker();
 
-  Future getImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+  Future getImage(ImageSource imageSource) async {
+    final pickedFile = await picker.pickImage(source: imageSource);
 
     if (pickedFile != null) {
       image = await pickedFile.readAsBytes();

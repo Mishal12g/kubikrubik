@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/sample_item.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
@@ -13,8 +14,20 @@ import 'package:kubikrubik/ui/components/container_widget.dart';
 import 'package:kubikrubik/ui/components/form_text_field_widget.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page_controller.dart';
 
-class CatalogEditFormPage extends StatelessWidget {
+class CatalogEditFormPage extends StatefulWidget {
   const CatalogEditFormPage({super.key});
+
+  @override
+  State<CatalogEditFormPage> createState() => _CatalogEditFormPageState();
+}
+
+class _CatalogEditFormPageState extends State<CatalogEditFormPage> {
+  @override
+  void dispose() {
+    super.dispose();
+    final c = Get.find<CatalogPageController>();
+    c.image = null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,8 +159,8 @@ class _AvatarImageWidget extends StatelessWidget {
                           AppImages.addPhoto,
                         ),
                       ),
-                      onPressed: () {
-                        c.getImage();
+                      onPressed: () async {
+                        await _showModalBottomSheet(context, c);
                       },
                     ),
                   ),
@@ -155,13 +168,55 @@ class _AvatarImageWidget extends StatelessWidget {
               ],
             )
           : IconButton(
-              onPressed: () {
-                c.getImage();
+              onPressed: () async {
+                await _showModalBottomSheet(context, c);
               },
               icon: const Image(
                 image: AssetImage(AppImages.addPhoto),
               ),
             ),
+    );
+  }
+
+  Future<dynamic> _showModalBottomSheet(
+      BuildContext context, CatalogPageController c) {
+    return showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(2),
+        ),
+        height: 250,
+        child: AlertDialog(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          content: Expanded(
+            child: Column(
+              children: [
+                ButtonWidget(
+                  color: ColorsApp.blueButton,
+                  text: const Text("Камера"),
+                  onTap: () {
+                    Get.back();
+                    c.getImage(ImageSource.camera);
+                  },
+                ),
+                const SizedBox(height: 12),
+                ButtonWidget(
+                  color: ColorsApp.blueButton,
+                  text: const Text("Галерея"),
+                  onTap: () {
+                    Get.back();
+                    c.getImage(ImageSource.gallery);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
