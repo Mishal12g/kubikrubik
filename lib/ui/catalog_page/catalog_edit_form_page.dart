@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/sample_item.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
@@ -253,9 +254,13 @@ class _SaveCatalogButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonWidget(
       color: ColorsApp.blue,
-      text: const Text(
+      text: Text(
         "Сохранить",
-        style: TextStyle(color: Colors.white),
+        style: GoogleFonts.rubik(
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
+          fontSize: 17.0,
+        ),
       ),
       onTap: () => onTap(),
     );

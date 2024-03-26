@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 
 class FormTextFieldWidget extends StatelessWidget {
@@ -35,9 +36,10 @@ class FormTextFieldWidget extends StatelessWidget {
       children: [
         Text(
           text,
-          style: const TextStyle(
-            fontSize: 16,
+          style: GoogleFonts.rubik(
             color: ColorsApp.grey,
+            fontWeight: FontWeight.w400,
+            fontSize: 16.0,
           ),
         ),
         const SizedBox(height: 6),
@@ -47,8 +49,12 @@ class FormTextFieldWidget extends StatelessWidget {
           child: TextField(
             onTap: () => onTap(),
             enabled: isEnabled,
-            style: const TextStyle(
-                fontSize: 16.0, height: 1.0, color: Colors.black),
+            style: GoogleFonts.rubik(
+              fontSize: 16.0,
+              height: 1.0,
+              fontWeight: FontWeight.w300,
+              color: Colors.black,
+            ),
             keyboardType: textInputType,
             inputFormatters: formatterText != null
                 ? [
@@ -67,9 +73,10 @@ class FormTextFieldWidget extends StatelessWidget {
             maxLines: null,
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: const TextStyle(
-                fontSize: 16,
+              hintStyle: GoogleFonts.rubik(
                 color: ColorsApp.grey,
+                fontWeight: FontWeight.w300,
+                fontSize: 16.0,
               ),
               suffixIcon: widget,
               border: const OutlineInputBorder(

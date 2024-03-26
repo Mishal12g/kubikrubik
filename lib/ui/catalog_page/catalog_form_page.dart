@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/sample_item.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
@@ -104,15 +103,6 @@ class CatalogFormPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       _PopUpSize(sizeController),
-                      // FormTextFieldWidget(
-                      //   readOnly: true,
-                      //   formatterText: FilteringTextInputFormatter.digitsOnly,
-                      //   controller: sizeController,
-                      //   text: "Размер",
-                      //   hintText: "3*3",
-                      //   widget: _PopUpSize(sizeController),
-                      //   onTap: () {},
-                      // ),
                       const SizedBox(height: 12),
                       FormTextFieldWidget(
                         controller: commentController,
@@ -242,9 +232,13 @@ class _SaveCatalogButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonWidget(
       color: ColorsApp.blue,
-      text: const Text(
+      text: Text(
         "Сохранить",
-        style: TextStyle(color: Colors.white),
+        style: GoogleFonts.rubik(
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
+          fontSize: 17.0,
+        ),
       ),
       onTap: () => onTap(),
     );

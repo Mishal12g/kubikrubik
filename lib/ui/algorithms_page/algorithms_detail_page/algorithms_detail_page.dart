@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page_controller.dart';
@@ -53,14 +54,20 @@ class AlgorithmsDetailPage extends StatelessWidget {
                       children: [
                         Text(
                           c.details[index].title,
-                          style: const TextStyle(
+                          style: GoogleFonts.rubik(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 12),
                         Text(
                           c.details[index].text,
+                          style: GoogleFonts.rubik(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 14,
+                          ),
                         ),
                       ],
                     ),

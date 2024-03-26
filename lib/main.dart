@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/record_catalog.dart';
@@ -38,11 +39,15 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-            color: Color.fromRGBO(49, 34, 218, 0.665),
-            foregroundColor: Colors.white,
-            titleTextStyle:
-                TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+        appBarTheme: AppBarTheme(
+          color: const Color.fromRGBO(49, 34, 218, 0.665),
+          foregroundColor: Colors.white,
+          titleTextStyle: GoogleFonts.rubik(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 17,
+          ),
+        ),
       ),
       initialRoute: "/",
       routes: {

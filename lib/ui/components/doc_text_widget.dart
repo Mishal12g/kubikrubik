@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DocTextWidget extends StatelessWidget {
   final String title;
@@ -19,14 +20,17 @@ class DocTextWidget extends StatelessWidget {
         children: <TextSpan>[
           TextSpan(
             text: title,
-            style: TextStyle(
-              fontWeight: font,
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
               fontSize: 14,
             ),
           ),
           TextSpan(
             text: text,
-            style: const TextStyle(
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w300,
               fontSize: 14,
             ),
           ),

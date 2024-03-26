@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 
 class OnboardingWidget extends StatelessWidget {
@@ -26,7 +27,13 @@ class OnboardingWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               )),
               const SizedBox(height: 12),
-              Text(title),
+              Text(
+                title,
+                style: GoogleFonts.rubik(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18,
+                ),
+              ),
             ],
           ),
         ),

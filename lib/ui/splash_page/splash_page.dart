@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/services/onboarding.dart';
@@ -33,29 +34,30 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: ColorsApp.backgroundColor,
       body: Stack(
         children: [
-          BackgroundImageWidget(),
+          const BackgroundImageWidget(),
           Center(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(
+                const Image(
                   width: 85,
                   height: 85,
                   image: AssetImage(AppImages.kubik),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Text(
                   "Кубик Рубика",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                      color: Colors.white),
+                  style: GoogleFonts.rubik(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 28,
+                  ),
                 ),
               ],
             ),

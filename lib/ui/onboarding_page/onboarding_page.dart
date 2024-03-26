@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/UI/components/onboarding_widget.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/services/settings_service.dart';
@@ -67,9 +68,13 @@ class _ReferenceButtonsWidget extends StatelessWidget {
           onPressed: () {
             SettingsService.termsAndAgreement();
           },
-          child: const Text(
+          child: Text(
             "Условия использования",
-            style: TextStyle(fontSize: 10, color: ColorsApp.grey),
+            style: GoogleFonts.rubik(
+              color: ColorsApp.grey,
+              fontWeight: FontWeight.w400,
+              fontSize: 10,
+            ),
           ),
         ),
         Container(
@@ -81,9 +86,13 @@ class _ReferenceButtonsWidget extends StatelessWidget {
           onPressed: () {
             SettingsService.launchURL();
           },
-          child: const Text(
+          child: Text(
             "Политика конфиденциальности",
-            style: TextStyle(fontSize: 10, color: ColorsApp.grey),
+            style: GoogleFonts.rubik(
+              color: ColorsApp.grey,
+              fontWeight: FontWeight.w400,
+              fontSize: 10,
+            ),
           ),
         ),
       ],
@@ -101,8 +110,13 @@ class _OnboardingButtonsWidget extends StatelessWidget {
       children: [
         Expanded(
           child: ButtonWidget(
-            text: const Text(
+            text: Text(
               "Пропустить",
+              style: GoogleFonts.rubik(
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+                fontSize: 17,
+              ),
             ),
             color: ColorsApp.white,
             onTap: () {
@@ -113,9 +127,13 @@ class _OnboardingButtonsWidget extends StatelessWidget {
         const SizedBox(width: 13),
         Expanded(
           child: ButtonWidget(
-            text: const Text(
+            text: Text(
               "Далее",
-              style: TextStyle(color: ColorsApp.white),
+              style: GoogleFonts.rubik(
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+                fontSize: 17,
+              ),
             ),
             color: ColorsApp.blue,
             onTap: () {

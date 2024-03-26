@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_page_view_indicator/flutter_page_view_indicator.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page_controller.dart';
@@ -38,21 +39,29 @@ class AlgorithmsPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   const _LabelMethodsAndAlgorithmsWidget(),
                   const SizedBox(height: 12),
-                  const ContainerWidget(
+                  ContainerWidget(
                     widget: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "Главный алгоритм — Пиф-паф",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                          style: GoogleFonts.rubik(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
                             fontSize: 18,
                           ),
                         ),
-                        SizedBox(height: 12),
-                        Text("Алгоритм состоит из 4 движений:"),
-                        SizedBox(height: 12),
-                        Row(
+                        const SizedBox(height: 12),
+                        Text(
+                          "Алгоритм состоит из 4 движений:",
+                          style: GoogleFonts.rubik(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image(image: AssetImage(AppImages.algorithms)),
@@ -98,10 +107,13 @@ class _LabelMethodsAndAlgorithmsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
+    return Text(
       "Методы и алгоритмы решения головоломки:",
-      style: TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white),
+      style: GoogleFonts.rubik(
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
+        fontSize: 22,
+      ),
     );
   }
 }
@@ -188,7 +200,11 @@ class _PageWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+            ),
           ),
           const SizedBox(height: 12),
           DocTextWidget(

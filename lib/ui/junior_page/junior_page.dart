@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
@@ -60,19 +61,33 @@ class _ThedBlock extends StatelessWidget {
         widget: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-            "Действие внутренних механизмов кубика Рубика базируется на вращении отдельных слоев вокруг центральных осей. Каждая из шести граней кубика может вращаться независимо от остальных:"),
+        Text(
+          "Действие внутренних механизмов кубика Рубика базируется на вращении отдельных слоев вокруг центральных осей. Каждая из шести граней кубика может вращаться независимо от остальных:",
+          style: GoogleFonts.rubik(
+            color: Colors.black,
+            fontWeight: FontWeight.w300,
+            fontSize: 14,
+          ),
+        ),
         const SizedBox(height: 12),
-        const Text(
+        Text(
           "1. Фронтальная (передняя) грань (F) - вращение по часовой стрелке или против.\n2. Задняя (задняя) грань (B) - вращение по часовой стрелке или против.\n3. Верхняя (верхняя) грань (U) - вращение по часовой стрелке или против.\n4. Нижняя (нижняя) грань (D) - вращение по часовой стрелке или против.\n5. Левая грань (L) - вращение по часовой стрелке или против.\n6. Правая грань (R) - вращение по часовой стрелке или против.",
-          style: TextStyle(fontSize: 12),
+          style: GoogleFonts.rubik(
+            color: Colors.black,
+            fontWeight: FontWeight.w300,
+            fontSize: 12,
+          ),
         ),
         const SizedBox(height: 12),
         ButtonWidget(
             color: ColorsApp.blue,
-            text: const Text(
+            text: Text(
               "Читать подробнее",
-              style: TextStyle(color: Colors.white),
+              style: GoogleFonts.rubik(
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+                fontSize: 15,
+              ),
             ),
             onTap: () {
               Get.toNamed("/junior_details_page");
@@ -87,16 +102,26 @@ class _BlockTwoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ContainerWidget(
+    return ContainerWidget(
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-              "Нумерация граней кубика Рубика не является официальной, но обычно используется следующая схема:"),
-          SizedBox(height: 12),
+            "Нумерация граней кубика Рубика не является официальной, но обычно используется следующая схема:",
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w300,
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(height: 12),
           Text(
             "1. Белая грань расположена против красной. \n2. Синяя грань против оранжевой. \n3. Зеленая грань против желтой",
-            style: TextStyle(fontSize: 12),
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w300,
+              fontSize: 12,
+            ),
           ),
         ],
       ),

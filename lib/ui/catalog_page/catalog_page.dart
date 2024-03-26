@@ -1,11 +1,10 @@
 import 'dart:typed_data';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/catalog_pop_up.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
@@ -111,24 +110,36 @@ class CatalogPage extends StatelessWidget {
             Radius.circular(2.0),
           ),
         ),
-        title: const Center(
+        title: Center(
           child: Text(
             "Удалить",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.rubik(
+              fontWeight: FontWeight.w600,
               fontSize: 24,
               color: ColorsApp.redAccent,
             ),
           ),
         ),
-        content: Text("Вы действительно хотите удалить “${catalog.name}”?"),
+        content: Text(
+          "Вы действительно хотите удалить “${catalog.name}”?",
+          style: GoogleFonts.rubik(
+            color: Colors.black,
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),
+        ),
         actions: [
           Row(
             children: [
               Expanded(
                 child: ButtonWidget(
-                    text: const Text(
+                    text: Text(
                       "Закрыть",
+                      style: GoogleFonts.rubik(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
                     ),
                     onTap: () {
                       Get.back();
@@ -139,9 +150,11 @@ class CatalogPage extends StatelessWidget {
                 child: ButtonWidget(
                   widthBorder: 0,
                   color: ColorsApp.redAccent,
-                  text: const Text(
+                  text: Text(
                     "Удалить",
-                    style: TextStyle(
+                    style: GoogleFonts.rubik(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
                       color: Colors.white,
                     ),
                   ),
@@ -210,6 +223,11 @@ class CatalogPage extends StatelessWidget {
                             child: Text(
                               catalog.comment ?? "Пусто",
                               textAlign: TextAlign.left,
+                              style: GoogleFonts.rubik(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ],
@@ -221,9 +239,13 @@ class CatalogPage extends StatelessWidget {
               actions: [
                 ButtonWidget(
                     color: ColorsApp.blue,
-                    text: const Text(
+                    text: Text(
                       "Закрыть",
-                      style: TextStyle(color: Colors.white),
+                      style: GoogleFonts.rubik(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        color: Colors.white,
+                      ),
                     ),
                     onTap: () {
                       Get.back();
@@ -240,9 +262,13 @@ class _AddCatalogButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonWidget(
       color: ColorsApp.blue,
-      text: const Text(
+      text: Text(
         "Добавить новый",
-        style: TextStyle(color: Colors.white),
+        style: GoogleFonts.rubik(
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
+          fontSize: 17,
+        ),
       ),
       onTap: () {
         Get.toNamed("/catalog_form_page");
@@ -305,13 +331,21 @@ class _CatalogTileWidget extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(
+                    style: GoogleFonts.rubik(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 5),
-                  Text(size),
+                  Text(
+                    size,
+                    style: GoogleFonts.rubik(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -350,15 +384,26 @@ class _EditAndDeleteCatalogPopUP extends StatelessWidget {
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<CatalogPopUp>>[
-        const PopupMenuItem<CatalogPopUp>(
+        PopupMenuItem<CatalogPopUp>(
           value: CatalogPopUp.edit,
-          child: Text('Редактировать'),
+          child: Text(
+            'Редактировать',
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+            ),
+          ),
         ),
-        const PopupMenuItem<CatalogPopUp>(
+        PopupMenuItem<CatalogPopUp>(
           value: CatalogPopUp.delete,
           child: Text(
             'Уалить',
-            style: TextStyle(color: Colors.redAccent),
+            style: GoogleFonts.rubik(
+              color: Colors.redAccent,
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
           ),
         ),
       ],
@@ -389,17 +434,21 @@ class _EmptyStateCatalogWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "Ваш каталог пуст. ",
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      style: GoogleFonts.rubik(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
                     ),
                     GestureDetector(
-                      child: const Text(
+                      child: Text(
                         "Нажмите здесь,",
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                        style: GoogleFonts.rubik(
                             color: ColorsApp.yellowButton,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
                             decoration: TextDecoration.underline,
                             decorationColor: ColorsApp.yellowButton),
                       ),
@@ -409,9 +458,13 @@ class _EmptyStateCatalogWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
+                Text(
                   "чтобы добавить новый кубик",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: GoogleFonts.rubik(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                  ),
                 ),
               ],
             ),

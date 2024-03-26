@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/helpers/date_formatters.dart';
 import 'package:kubikrubik/models/catalog.dart';
 import 'package:kubikrubik/models/enums/timer_stopwatch.dart';
@@ -20,16 +21,18 @@ class TimerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const selectedStyle = TextStyle(
+    final selectedStyle = GoogleFonts.rubik(
       decoration: TextDecoration.underline,
       decorationColor: Colors.white,
-      fontWeight: FontWeight.bold,
       color: Colors.white,
-      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      fontSize: 18.0,
     );
-    const notSelectedStyle = TextStyle(
+
+    final notSelectedStyle = GoogleFonts.rubik(
       color: ColorsApp.grey,
-      fontSize: 16,
+      fontWeight: FontWeight.w300,
+      fontSize: 16.0,
     );
 
     final TextEditingController selectTextFieldController =
@@ -191,12 +194,26 @@ class _PopUpSize extends StatelessWidget {
                   child: item == c.catalogs.first
                       ? Row(
                           children: [
-                            Text(item.name),
+                            Text(
+                              item.name,
+                              style: GoogleFonts.rubik(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.0,
+                              ),
+                            ),
                             const Spacer(),
                             const Image(image: AssetImage(AppImages.popUpOpen))
                           ],
                         )
-                      : Text(item.name),
+                      : Text(
+                          item.name,
+                          style: GoogleFonts.rubik(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16.0,
+                          ),
+                        ),
                 );
               },
             ).toList(),
@@ -285,9 +302,10 @@ class _StopWatchWidget extends StatelessWidget {
         Center(
           child: Text(
             c.timeResult,
-            style: const TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 36.0,
             ),
           ),
         ),
@@ -337,9 +355,10 @@ class _TimerWidget extends StatelessWidget {
         Center(
           child: Text(
             c.timeResult,
-            style: const TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 36.0,
             ),
           ),
         ),
@@ -376,16 +395,27 @@ class _TimerWidget extends StatelessWidget {
                                       c.selectTime(value);
                                     },
                                     children: c.timeStrings
-                                        .map((e) => Text(e))
+                                        .map(
+                                          (e) => Text(
+                                            e,
+                                            style: GoogleFonts.rubik(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16.0,
+                                            ),
+                                          ),
+                                        )
                                         .toList(),
                                   ),
                                 ),
                                 ButtonWidget(
                                     color: ColorsApp.blue,
-                                    text: const Text(
+                                    text: Text(
                                       "Выбрать",
-                                      style: TextStyle(
+                                      style: GoogleFonts.rubik(
                                         color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 15.0,
                                       ),
                                     ),
                                     onTap: () {
@@ -403,10 +433,10 @@ class _TimerWidget extends StatelessWidget {
                   children: [
                     Text(
                       c.selectedTime,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                      style: GoogleFonts.rubik(
                         color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.0,
                       ),
                     ),
                     const SizedBox(width: 15),

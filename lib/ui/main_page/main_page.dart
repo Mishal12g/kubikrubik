@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
@@ -23,12 +24,12 @@ class MainPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Кубик Рубика",
-                      style: TextStyle(
-                        fontSize: 36,
+                      style: GoogleFonts.rubik(
                         color: ColorsApp.white,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 36,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -107,13 +108,16 @@ class _JuniorTileWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "Устройство кубика Рубика",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
+                        style: GoogleFonts.rubik(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18,
+                        ),
                       ),
                       const SizedBox(height: 6),
                       Row(
@@ -126,14 +130,21 @@ class _JuniorTileWidget extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
                                 color: ColorsApp.blueButton),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image(
+                                const Image(
                                   image: AssetImage(AppImages.hourglass),
                                 ),
-                                SizedBox(width: 8),
-                                Text("10 минут"),
+                                const SizedBox(width: 8),
+                                Text(
+                                  "10 минут",
+                                  style: GoogleFonts.rubik(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ],
                             ),
                           ),

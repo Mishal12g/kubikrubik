@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
 import 'package:kubikrubik/services/settings_service.dart';
@@ -77,9 +78,10 @@ class _SettingTileWidget extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: const TextStyle(
+                style: GoogleFonts.rubik(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               const Spacer(),

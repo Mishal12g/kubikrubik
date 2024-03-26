@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/helpers/date_formatters.dart';
 import 'package:kubikrubik/models/enums/records_state.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
@@ -26,15 +27,17 @@ class RecordsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const selectedStyle = TextStyle(
+    final selectedStyle = GoogleFonts.rubik(
       decoration: TextDecoration.underline,
       decorationColor: Colors.white,
-      fontWeight: FontWeight.bold,
       color: Colors.white,
+      fontWeight: FontWeight.w500,
       fontSize: 18,
     );
-    const notSelectedStyle = TextStyle(
+
+    final notSelectedStyle = GoogleFonts.rubik(
       color: ColorsApp.grey,
+      fontWeight: FontWeight.w300,
       fontSize: 16,
     );
 
@@ -168,8 +171,9 @@ class _RecordTile extends StatelessWidget {
         children: [
           Text(
             titles[index],
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.rubik(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
               fontSize: 16,
             ),
           ),
@@ -181,7 +185,9 @@ class _RecordTile extends StatelessWidget {
               Expanded(
                 child: Text(
                   texts[index],
-                  style: const TextStyle(
+                  style: GoogleFonts.rubik(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
                     fontSize: 12,
                   ),
                 ),
@@ -267,7 +273,6 @@ class _MyRecordsListWidget extends StatelessWidget {
 
 class _TwoButtonsSwitchWidget extends StatelessWidget {
   const _TwoButtonsSwitchWidget({
-    super.key,
     required this.c,
     required this.selectedStyle,
     required this.notSelectedStyle,
@@ -335,7 +340,9 @@ class _RecordTileWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     date,
-                    style: const TextStyle(
+                    style: GoogleFonts.rubik(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300,
                       fontSize: 10,
                     ),
                   ),
@@ -343,9 +350,10 @@ class _RecordTileWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     size,
-                    style: const TextStyle(
+                    style: GoogleFonts.rubik(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
                       fontSize: 12,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -353,20 +361,22 @@ class _RecordTileWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Text(
+                      Text(
                         "Time",
-                        style: TextStyle(
-                          fontSize: 12,
+                        style: GoogleFonts.rubik(
                           color: ColorsApp.grey,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
                         ),
                       ),
                       const SizedBox(width: 8.0),
                       Text(
                         time,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: ColorsApp.blue,
-                            fontWeight: FontWeight.w400),
+                        style: GoogleFonts.rubik(
+                          color: ColorsApp.blue,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                        ),
                       ),
                     ],
                   ),

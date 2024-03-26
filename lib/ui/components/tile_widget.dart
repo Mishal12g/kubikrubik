@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TileWidget extends StatelessWidget {
   final String title;
@@ -32,10 +33,10 @@ class TileWidget extends StatelessWidget {
                 const SizedBox(width: 12),
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: GoogleFonts.rubik(
+                    color: const Color.fromRGBO(31, 39, 75, 1),
+                    fontWeight: FontWeight.w500,
                     fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(31, 39, 75, 1),
                   ),
                 ),
               ],
