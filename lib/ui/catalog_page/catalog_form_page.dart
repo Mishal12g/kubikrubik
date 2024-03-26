@@ -14,20 +14,8 @@ import 'package:kubikrubik/ui/components/form_text_field_widget.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page_controller.dart';
 import 'package:uuid/uuid.dart';
 
-class CatalogFormPage extends StatefulWidget {
+class CatalogFormPage extends StatelessWidget {
   const CatalogFormPage({super.key});
-
-  @override
-  State<CatalogFormPage> createState() => _CatalogFormPageState();
-}
-
-class _CatalogFormPageState extends State<CatalogFormPage> {
-  @override
-  void dispose() {
-    super.dispose();
-    final c = Get.find<CatalogPageController>();
-    c.image = null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +183,7 @@ class _CatalogFormPageState extends State<CatalogFormPage> {
   }
 }
 
-class _AvatarWidget extends StatelessWidget {
+class _AvatarWidget extends StatefulWidget {
   const _AvatarWidget({
     required this.c,
   });
@@ -203,12 +191,24 @@ class _AvatarWidget extends StatelessWidget {
   final CatalogPageController c;
 
   @override
+  State<_AvatarWidget> createState() => _AvatarWidgetState();
+}
+
+class _AvatarWidgetState extends State<_AvatarWidget> {
+  @override
+  void dispose() {
+    super.dispose();
+
+    widget.c.image = null;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: Image.memory(
-          c.image!,
+          widget.c.image!,
           fit: BoxFit.fitWidth,
           width: double.infinity,
         ),
