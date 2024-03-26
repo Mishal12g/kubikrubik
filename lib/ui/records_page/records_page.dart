@@ -78,7 +78,6 @@ class RecordsPage extends StatelessWidget {
 
 class _WorldRecordsTileWidget extends StatelessWidget {
   const _WorldRecordsTileWidget({
-    super.key,
     required this.texts,
     required this.titles,
   });

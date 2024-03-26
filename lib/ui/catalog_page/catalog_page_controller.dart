@@ -16,6 +16,7 @@ class CatalogPageController extends GetxController {
       image = await pickedFile.readAsBytes();
       update();
     } else {
+      // ignore: avoid_print
       print('No image selected.');
     }
   }
