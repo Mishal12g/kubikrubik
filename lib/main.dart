@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kubikrubik/models/catalog.dart';
-import 'package:kubikrubik/models/record_catalog.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_detail_page/algorithms_detail_page.dart';
 import 'package:kubikrubik/ui/algorithms_page/algorithms_page.dart';
 import 'package:kubikrubik/ui/catalog_page/catalog_edit_form_page.dart';
@@ -18,16 +15,7 @@ import 'package:kubikrubik/ui/settings_page/settings_page.dart';
 import 'package:kubikrubik/ui/splash_page/splash_page.dart';
 import 'package:kubikrubik/ui/timer_page/timer_page.dart';
 
-Future<void> main(List<String> args) async {
-  await Hive.initFlutter();
-
-  Hive.registerAdapter(CatalogAdapter());
-  Hive.registerAdapter(RecordCatalogAdapter());
-
-  await Hive.openBox<List>("Catalogs");
-  await Hive.openBox<List>("Records");
-  await Hive.openBox<bool>("Onboarding");
-
+void main(List<String> args) {
   runApp(const MyApp());
 }
 

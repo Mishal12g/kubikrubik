@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kubikrubik/resources/colors_app.dart';
 import 'package:kubikrubik/resources/resources.dart';
+import 'package:kubikrubik/services/hive_initialization.dart';
 import 'package:kubikrubik/services/onboarding.dart';
 import 'package:kubikrubik/ui/components/background_image_widget.dart';
 
@@ -16,7 +17,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    nabigateToHome();
+    HiveInitialization.initHive().then((_) {
+      nabigateToHome();
+    });
   }
 
   nabigateToHome() {
