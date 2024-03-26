@@ -262,7 +262,7 @@ class _MyTimerWidget extends StatelessWidget {
   }
 }
 
-class _StopWatchWidget extends StatefulWidget {
+class _StopWatchWidget extends StatelessWidget {
   const _StopWatchWidget({
     required this.c,
     required this.selectTextFieldController,
@@ -274,37 +274,24 @@ class _StopWatchWidget extends StatefulWidget {
   final TextEditingController nameTextFieldController;
 
   @override
-  State<_StopWatchWidget> createState() => _StopWatchWidgetState();
-}
-
-class _StopWatchWidgetState extends State<_StopWatchWidget> {
-  @override
-  void dispose() {
-    super.dispose();
-    widget.c.stopTimer();
-    widget.c.clearResult();
-    widget.c.setTimerOrStopwatch(TimerStopwatch.timer);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TimerButtonWidget(
-          isPlay: widget.c.isPlay,
+          isPlay: c.isPlay,
           action: () {
-            if (widget.selectTextFieldController.text.isNotEmpty &&
-                widget.nameTextFieldController.text.isNotEmpty) {
-              widget.c.isPlay = !widget.c.isPlay;
-              if (widget.c.isPlay) {
-                widget.c.startTimer();
+            if (selectTextFieldController.text.isNotEmpty &&
+                nameTextFieldController.text.isNotEmpty) {
+              c.isPlay = !c.isPlay;
+              if (c.isPlay) {
+                c.startTimer();
               } else {
-                widget.c.stopTimer();
+                c.stopTimer();
                 final record = RecordCatalog(
                   date: DateTime.now().toString(),
-                  size: widget.c.catalog?.size ?? "not size",
-                  name: widget.nameTextFieldController.text,
-                  seconds: widget.c.seconds,
+                  size: c.catalog?.size ?? "not size",
+                  name: nameTextFieldController.text,
+                  seconds: c.seconds,
                 );
 
                 Get.find<RecordPageController>().addRecords(record);
@@ -314,7 +301,7 @@ class _StopWatchWidgetState extends State<_StopWatchWidget> {
         ),
         Center(
           child: Text(
-            widget.c.timeResult,
+            c.timeResult,
             style: GoogleFonts.rubik(
               color: Colors.black,
               fontWeight: FontWeight.w500,
@@ -327,7 +314,7 @@ class _StopWatchWidgetState extends State<_StopWatchWidget> {
   }
 }
 
-class _TimerWidget extends StatefulWidget {
+class _TimerWidget extends StatelessWidget {
   const _TimerWidget({
     required this.c,
     required this.selectTextFieldController,
@@ -339,37 +326,25 @@ class _TimerWidget extends StatefulWidget {
   final TextEditingController nameTextFieldController;
 
   @override
-  State<_TimerWidget> createState() => _TimerWidgetState();
-}
-
-class _TimerWidgetState extends State<_TimerWidget> {
-  @override
-  void dispose() {
-    super.dispose();
-    widget.c.stopTimer();
-    widget.c.clearResult();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TimerButtonWidget(
-          isPlay: widget.c.isPlay,
+          isPlay: c.isPlay,
           action: () {
-            if (widget.selectTextFieldController.text.isNotEmpty &&
-                widget.nameTextFieldController.text.isNotEmpty) {
-              widget.c.isPlay = !widget.c.isPlay;
-              if (widget.c.isPlay) {
-                widget.c.startTimer();
+            if (selectTextFieldController.text.isNotEmpty &&
+                nameTextFieldController.text.isNotEmpty) {
+              c.isPlay = !c.isPlay;
+              if (c.isPlay) {
+                c.startTimer();
               } else {
-                widget.c.stopTimer();
+                c.stopTimer();
 
                 final record = RecordCatalog(
                   date: Formattes.dateAndTime(),
-                  size: widget.c.catalog?.size ?? "not size",
-                  name: widget.nameTextFieldController.text,
-                  seconds: widget.c.seconds,
+                  size: c.catalog?.size ?? "not size",
+                  name: nameTextFieldController.text,
+                  seconds: c.seconds,
                 );
 
                 Get.find<RecordPageController>().addRecords(record);
@@ -379,7 +354,7 @@ class _TimerWidgetState extends State<_TimerWidget> {
         ),
         Center(
           child: Text(
-            widget.c.timeResult,
+            c.timeResult,
             style: GoogleFonts.rubik(
               color: Colors.black,
               fontWeight: FontWeight.w500,
@@ -396,7 +371,7 @@ class _TimerWidgetState extends State<_TimerWidget> {
               ),
               TextButton(
                 onPressed: () {
-                  if (!widget.c.isPlay) {
+                  if (!c.isPlay) {
                     showCupertinoDialog<String>(
                       context: context,
                       builder: (BuildContext context) {
@@ -417,9 +392,9 @@ class _TimerWidgetState extends State<_TimerWidget> {
                                     backgroundColor: Colors.white,
                                     itemExtent: 32.0,
                                     onSelectedItemChanged: (value) {
-                                      widget.c.selectTime(value);
+                                      c.selectTime(value);
                                     },
-                                    children: widget.c.timeStrings
+                                    children: c.timeStrings
                                         .map(
                                           (e) => Text(
                                             e,
@@ -457,7 +432,7 @@ class _TimerWidgetState extends State<_TimerWidget> {
                 child: Row(
                   children: [
                     Text(
-                      widget.c.selectedTime,
+                      c.selectedTime,
                       style: GoogleFonts.rubik(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,

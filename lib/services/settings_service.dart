@@ -20,11 +20,11 @@ class SettingsService {
     }
   }
 
-  static appReview() async {
+  static Future<void> appReview() async {
     final InAppReview inAppReview = InAppReview.instance;
 
     if (await inAppReview.isAvailable()) {
-      inAppReview.requestReview();
+      await inAppReview.requestReview();
     }
   }
 }
