@@ -67,6 +67,8 @@ class TimerPageController extends GetxController {
   }
 
   void startTimer() {
+    String selected = selectedTime;
+
     if (!timerIsActive) {
       _timeResult = "00:00";
       update();
@@ -77,9 +79,14 @@ class TimerPageController extends GetxController {
         (timer) {
           seconds = timer.tick;
           _timeResult = Formattes.formatDuration(timer.tick);
+
+          int secondsSelected = Formattes.parseDuration(selected);
+          secondsSelected -= timer.tick;
+          selectedTime = Formattes.formatDuration(secondsSelected);
+
           update();
           if (timerOrStopwatch == TimerStopwatch.timer) {
-            if (selectedTime == _timeResult) {
+            if (selected == _timeResult) {
               isPlay = false;
               stopTimer();
               HapticFeedback.vibrate();
