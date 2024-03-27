@@ -137,9 +137,9 @@ class CatalogFormPage extends StatelessWidget {
     );
   }
 
-  Future<dynamic> _showModalBottomSheet(
-      BuildContext context, CatalogPageController c) {
-    return showModalBottomSheet(
+  Future<void> _showModalBottomSheet(
+      BuildContext context, CatalogPageController c) async {
+    return await showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
       builder: (context) => Container(
@@ -153,28 +153,26 @@ class CatalogFormPage extends StatelessWidget {
           surfaceTintColor: Colors.white,
           content: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Expanded(
-              child: Column(
-                children: [
-                  ButtonWidget(
-                    color: ColorsApp.blueButton,
-                    text: const Text("Камера"),
-                    onTap: () {
-                      Get.back();
-                      c.getImage(ImageSource.camera);
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  ButtonWidget(
-                    color: ColorsApp.blueButton,
-                    text: const Text("Галерея"),
-                    onTap: () {
-                      Get.back();
-                      c.getImage(ImageSource.gallery);
-                    },
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                ButtonWidget(
+                  color: ColorsApp.blueButton,
+                  text: const Text("Камера"),
+                  onTap: () async {
+                    Get.back();
+                    await c.getImage(ImageSource.camera);
+                  },
+                ),
+                const SizedBox(height: 12),
+                ButtonWidget(
+                  color: ColorsApp.blueButton,
+                  text: const Text("Галерея"),
+                  onTap: () async {
+                    Get.back();
+                    await c.getImage(ImageSource.gallery);
+                  },
+                ),
+              ],
             ),
           ),
         ),

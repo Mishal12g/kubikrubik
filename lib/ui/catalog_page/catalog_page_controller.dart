@@ -7,10 +7,9 @@ import 'package:kubikrubik/services/catalogs_services.dart';
 class CatalogPageController extends GetxController {
   Uint8List? image;
 
-  final picker = ImagePicker();
-
-  Future getImage(ImageSource imageSource) async {
-    final pickedFile = await picker.pickImage(source: imageSource);
+  Future<void> getImage(ImageSource imageSource) async {
+    final picker = ImagePicker();
+    XFile? pickedFile = await picker.pickImage(source: imageSource);
 
     if (pickedFile != null) {
       image = await pickedFile.readAsBytes();

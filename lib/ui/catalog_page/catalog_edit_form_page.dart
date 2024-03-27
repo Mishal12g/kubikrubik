@@ -191,28 +191,26 @@ class _AvatarImageWidgetState extends State<_AvatarImageWidget> {
         child: AlertDialog(
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
-          content: Expanded(
-            child: Column(
-              children: [
-                ButtonWidget(
-                  color: ColorsApp.blueButton,
-                  text: const Text("Камера"),
-                  onTap: () {
-                    Get.back();
-                    c.getImage(ImageSource.camera);
-                  },
-                ),
-                const SizedBox(height: 12),
-                ButtonWidget(
-                  color: ColorsApp.blueButton,
-                  text: const Text("Галерея"),
-                  onTap: () {
-                    Get.back();
-                    c.getImage(ImageSource.gallery);
-                  },
-                ),
-              ],
-            ),
+          content: Column(
+            children: [
+              ButtonWidget(
+                color: ColorsApp.blueButton,
+                text: const Text("Камера"),
+                onTap: () async {
+                  Get.back();
+                  await c.getImage(ImageSource.camera);
+                },
+              ),
+              const SizedBox(height: 12),
+              ButtonWidget(
+                color: ColorsApp.blueButton,
+                text: const Text("Галерея"),
+                onTap: () async {
+                  Get.back();
+                  await c.getImage(ImageSource.gallery);
+                },
+              ),
+            ],
           ),
         ),
       ),
