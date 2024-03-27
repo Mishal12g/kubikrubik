@@ -205,12 +205,12 @@ class _AvatarWidgetState extends State<_AvatarWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(100),
+      child: ClipOval(
         child: Image.memory(
           widget.c.image!,
-          fit: BoxFit.fitWidth,
-          width: double.infinity,
+          fit: BoxFit.cover,
+          width: 179,
+          height: 179,
         ),
       ),
     );

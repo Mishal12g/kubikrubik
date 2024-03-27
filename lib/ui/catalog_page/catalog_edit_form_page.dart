@@ -138,14 +138,12 @@ class _AvatarImageWidgetState extends State<_AvatarImageWidget> {
       child: widget.image != null
           ? Stack(
               children: [
-                Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.memory(
-                      widget.image!,
-                      fit: BoxFit.fitWidth,
-                      width: double.infinity,
-                    ),
+                ClipOval(
+                  child: Image.memory(
+                    widget.image!,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: double.infinity,
                   ),
                 ),
                 Positioned(

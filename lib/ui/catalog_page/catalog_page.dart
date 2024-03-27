@@ -311,12 +311,14 @@ class _CatalogTileWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
               ),
               child: image != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.memory(
-                        image ?? Uint8List(0),
-                        width: double.infinity,
-                        fit: BoxFit.fitWidth,
+                  ? Center(
+                      child: ClipOval(
+                        child: Image.memory(
+                          image ?? Uint8List(0),
+                          fit: BoxFit.cover,
+                          width: 179,
+                          height: 179,
+                        ),
                       ),
                     )
                   : const Padding(
